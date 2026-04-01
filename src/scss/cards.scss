@@ -1,0 +1,22 @@
+.hover-lift-card {
+	transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+	will-change: transform;
+}
+
+.hover-lift-card:hover,
+.hover-lift-card:focus-visible {
+	transform: translateY( -6px );
+	box-shadow: 0 0.85rem 1.8rem rgba( 0, 0, 0, 0.28 );
+	border-color: rgba( 255, 255, 255, 0.3 );
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.hover-lift-card {
+		transition: none;
+	}
+
+	.hover-lift-card:hover,
+	.hover-lift-card:focus-visible {
+		transform: none;
+	}
+}
