@@ -14,7 +14,7 @@ import { certifiedCoursesLinks } from '../data/CertifiedCourses';
 import { portfolioProjectsLinks } from '../data/PortfolioProjects';
 
 // Import types.
-import type { CertifiedCourse, EducationSchool, FreelanceExperience, PortfolioProject } from '../models/Types';
+import type { CertifiedCourse, EducationSchool, FreelanceExperience, PortfolioProject } from '../models';
 
 export const CurriculumVitaeScreen = () =>
 {

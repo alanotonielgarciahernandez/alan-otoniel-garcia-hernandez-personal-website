@@ -1,20 +1,5 @@
-// Types.ts
-// Type definitions for the project.
-
-// Type for external links data.
-export type ExternalLink =
-{
-    name: string,
-    href: string,
-}
-
-// Type for social media links data.
-export type SocialLink =
-{
-    name: string,
-    href: string,
-    icon: string,
-}
+// CurriculumVitaeTypes.ts
+// Curriculum Vitae type definitions for the project.
 
 // Type for education schools data.
 export type EducationSchool =
@@ -51,11 +36,4 @@ export type PortfolioProject =
     technologies: string[],
     description: string,
     link: string,
-}
-
-// Type for contact topics data.
-export type ContactTopic =
-{
-    name: string,
-    description: string,
 }

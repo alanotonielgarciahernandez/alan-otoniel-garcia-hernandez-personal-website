@@ -19,7 +19,7 @@ import { socialLinks } from '../data/SocialMedia';
 import { contactTopicIcons } from '../data/ContactInformation';
 
 // Import types.
-import type { ContactTopic, SocialLink } from '../models/Types';
+import type { ContactTopic, SocialLink } from '../models';
     
 export const ContactScreen = () =>
 {

@@ -17,7 +17,7 @@ import { portfolioProjectsLinks } from '../data/PortfolioProjects';
 import { socialLinks } from '../data/SocialMedia';
 
 // Import types.
-import type { PortfolioProject, SocialLink } from '../models/Types';
+import type { PortfolioProject, SocialLink } from '../models';
 
 
 export const HomeScreen = () =>
