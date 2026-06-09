@@ -10,10 +10,6 @@ import { useTranslation } from 'react-i18next';
 // Import React Bootstrap components.
 import { Button, Image, Nav } from 'react-bootstrap';
 
-// Import external links data.
-import { externalLinks } from '../data/ExternalLinks';
-import type { ExternalLink } from '../models/Types';
-
 // Props for the AppNavbar component.
 type AppNavbarProps =
 {
@@ -51,7 +47,7 @@ export const AppNavbar = ( { onNavigate }: AppNavbarProps ) => {
                 onClick= { () => handleNavigate( '/' ) }
             >
                 <Image
-                    src='/signature-nav.svg'
+                    src='/icons/signature-nav.svg'
                     alt='Alan Otoniel Garcia Hernandez'
                 />
             </a>
@@ -94,23 +90,17 @@ export const AppNavbar = ( { onNavigate }: AppNavbarProps ) => {
 
             <hr />
 
-            { /* Map over the external links data to create link elements. */ }
-            { 
-                externalLinks.map(
-                    ( externalLink: ExternalLink, index: number ) =>
-                        <Button
-                            key={ index }
-                            className='d-flex btn-transparent mb-3'
-                            href={ externalLink.href }
-                            target='_blank'
-                            rel='noreferrer'
-                        >
-                            <i className='bi bi-box-arrow-up-right me-2' />
-                            
-                            { externalLink.name }
-                        </Button>
-                )
-            }
+            { /* Personal Projects button. */ }
+            <Button
+                className='d-flex btn-transparent mb-3'
+                href='https://projects.alanotonielgarciahernandez.com'
+                target='_blank'
+                rel='noreferrer'
+            >
+                <i className='bi bi-box-arrow-up-right me-2' />
+                
+                Personal Projects
+            </Button>
 
             { /* Footer with copyright information. */ }
             <span className='text-secondary'>

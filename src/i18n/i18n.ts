@@ -9,7 +9,6 @@ import { initReactI18next } from 'react-i18next';
 // Import localization resources.
 import { navigationEnglish, navigationSpanish } from './NavigationLocale';
 import { homeEnglish, homeSpanish } from './HomeLocale';
-import { curriculumVitaeEnglish, curriculumVitaeSpanish } from './CurriculumVitaeLocale';
 import { contactEnglish, contactSpanish } from './ContactLocale';
 
 i18n
@@ -33,9 +32,6 @@ i18n
           // Home page content.
           home: homeEnglish,
 
-          // Curriculum Vitae page content.
-          cv: curriculumVitaeEnglish,
-
           // Contact page content.
           contact: contactEnglish,
         }
@@ -52,9 +48,6 @@ i18n
 
           // Home page content.
           home: homeSpanish,
-
-          // Curriculum Vitae page content.
-          cv: curriculumVitaeSpanish,
 
           // Contact page content.
           contact: contactSpanish,

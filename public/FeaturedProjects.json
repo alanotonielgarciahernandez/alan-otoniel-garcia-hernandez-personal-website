@@ -1,0 +1,10 @@
+[
+    {
+        "id": "personal-projects",
+        "title": "Personal Projects",
+        "description": "A web application similar to GitHub to share repositories source code.",
+        "technologies": "JavaScript, React, SCSS, Go, GraphQL, MongoDB.",
+        "image": "/images/personal-projects.png",
+        "link": "https://projects.alanotonielgarciahernandez.com"
+    }
+]

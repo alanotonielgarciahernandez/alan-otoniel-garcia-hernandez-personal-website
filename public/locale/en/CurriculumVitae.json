@@ -1,0 +1,126 @@
+{
+    "education":
+    {
+        "title": "Education",
+
+        "schools":
+        [
+            {
+                "name": "Mariano Gálvez University of Guatemala",
+
+                "location": "Guatemala City, Guatemala.",
+
+                "degree": "Engineer in Information Systems and Computer Science.",
+
+                "period": "2024 – Present."
+            }
+        ]
+    },
+
+    "freelanceExperience":
+    {
+        "title": "Freelance Experience",
+
+        "experiences":
+        [
+            {
+                "role": "Freelance Web Developer.",
+
+                "technologies": "React, JavaScript, TypeScript, SCSS, Joomla.",
+
+                "period": "August 2024 – Present.",
+
+                "company": "KernelBPO",
+
+                "bossName": "Erwin Joel García Ramírez (Propietary of KernelBPO)"
+            },
+
+            {
+                "role": "Freelance Maintenance Technician.",
+
+                "technologies": "Lenovo Laptop and Desktop machines.",
+
+                "period": "June 2025, January 2026, May 2026.",
+
+                "company": "IT BUSINESS",
+
+                "bossName": "Mynor Noriega (Administrative Manager of IT BUSINESS)"
+            },
+
+            {
+                "role": "Freelance E-Commerce Website Developer.",
+
+                "technologies": "Shopify, Liquid, JavaScript.",
+
+                "period": "April 2021 - May 2021.",
+
+                "company": "Andree Shop",
+
+                "bossName": "Sebastian Andree Lopez Ortega (Propietary of Andree Shop)"
+            }
+        ]
+    },
+
+    "certifiedCourses":
+    {
+        "title": "Certified Courses",
+
+        "courses":
+        [
+            {
+                "name": "Learn Go from zero.",
+
+                "instructor": "Pablo Tilotta.",
+
+                "period": "March 2023.",
+
+                "link": "http://ude.my/UC-7fffa9f9-227f-4a38-acdf-21f42fa6505a"
+            }
+        ]
+    },
+
+    "interests":
+    {
+        "title": "Interests",
+
+        "description": "I want to expand my knowledge the most I can through various areas. Mostly about Computer Science."
+    },
+
+    "abilities":
+    {
+        "title": "Abilities",
+
+        "list":
+        [
+            "Native Spanish, Intermediate English.",
+
+            "JavaScript, TypeScript, Go, JAVA, Python.",
+
+            "Frameworks React, Gin.",
+
+            "SQL Server, MongoDB databases.",
+
+            "Microsoft Windows, formatting and installation of peripherals, preventive maintenance of computer equipment."
+        ]
+    },
+
+    "portfolioProjects":
+    {
+        "title": "Portfolio Projects",
+        
+        "projects":
+        [
+            {
+                "name": "Alan Otoniel García Hernández Personal Projects.",
+                
+                "technologies": "JavaScript, React, SCSS, Go, GraphQL, MongoDB.",
+                
+                "description": "A web application similar to GitHub to share repositories source code.",
+
+                "image": "/images/personal-projects.png",
+
+                "link": "https://projects.alanotonielgarciahernandez.com"
+            }
+        ]
+    }
+}

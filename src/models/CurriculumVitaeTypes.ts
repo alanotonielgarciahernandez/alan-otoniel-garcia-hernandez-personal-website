@@ -5,8 +5,8 @@
 export type EducationSchool =
 {
     name: string,
-    location: string
-    degree: string
+    location: string,
+    degree: string,
     period: string,
 }
 
@@ -35,5 +35,39 @@ export type PortfolioProject =
     name: string,
     technologies: string[],
     description: string,
+    image: string,
     link: string,
+}
+
+export type CurriculumVitaeContent =
+{
+    education: {
+        title: string,
+        schools: EducationSchool[],
+    },
+
+    freelanceExperience: {
+        title: string,
+        experiences: FreelanceExperience[],
+    },
+
+    certifiedCourses: {
+        title: string,
+        courses: CertifiedCourse[],
+    },
+
+    interests: {
+        title: string,
+        description: string,
+    },
+
+    abilities: {
+        title: string,
+        list: string[],
+    },
+
+    portfolioProjects: {
+        title: string,
+        projects: PortfolioProject[],
+    },
 }

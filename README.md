@@ -3,7 +3,7 @@
 <!-- markdownlint-disable no-inline-html heading-increment -->
 
 <div align='center'>
-  <img src='./public/signature.svg' alt='Alan Otoniel García Hernández Home Page' height='50px'>
+  <img src='./public/icons/signature.svg' alt='Alan Otoniel García Hernández Home Page' height='50px'>
 
   #### Alan Otoniel García Hernández Main Website.
 </div>
@@ -48,13 +48,14 @@ yarn build
 ```
 
 # Functions
-This project is a simple web application where you can navigate through three pages and find information about those pages.
+This project is a simple web application where you can navigate through specific pages displaying different personal information.
 
 ## Home Page.
 Contains an introduction about me, including general information about my work.
 
 ## Curriculum Vitae Page.
 Contains my professional career history, including my education, previous experience, certified courses, and portfolio projects.
+Content is read from a separated localized JSON files to make it easier to maintain and update in the future.
 
 ## Contact Page.
 Contains my contact information, including my preferred topics and availability.

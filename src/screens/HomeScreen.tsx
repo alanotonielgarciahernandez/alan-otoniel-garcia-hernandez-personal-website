@@ -4,14 +4,14 @@
 // Import localization hook.
 import { useTranslation } from 'react-i18next';
 
+// Import React hooks.
+import { useEffect, useState } from 'react';
+
 // Import React Router navigate function.
 import { useNavigate } from 'react-router-dom';
 
 // Import React Bootstrap components.
 import { Badge, Button, Card, Image, Stack } from 'react-bootstrap';
-
-// Import project links data.
-import { portfolioProjectsLinks } from '../data/PortfolioProjects';
 
 // Import social links data.
 import { socialLinks } from '../data/SocialMedia';
@@ -25,11 +25,42 @@ export const HomeScreen = () =>
     // React Router navigate function to change routes programmatically.
     const navigate = useNavigate();
 
-    // Translation hook to get the translation function for the current language.
+    // Translation hook to read the current active language.
     const { t } = useTranslation();
 
-    // Portfolio Projects data from translation array.
-    const portfolioProjects = t( 'cv.portfolioProjects.projects', { returnObjects: true } ) as PortfolioProject[];
+    // State to hold the featured projects content loaded from the public folder at runtime.
+    const [ featuredProjects, setFeaturedProjects ] = useState< PortfolioProject[] >( [] );
+
+    useEffect(
+        () =>
+        {
+            // AbortController to cancel the fetch request if the component unmounts or if the language changes before the request completes.
+            const controller = new AbortController();
+
+            const loadFeaturedProjects = async () =>
+            {
+                // Fetch the featured projects content from the public folder.
+                const response = await fetch(
+                    '/FeaturedProjects.json',
+                    { signal: controller.signal }
+                );
+
+                // If the response is not OK, return.
+                if ( !response.ok ) return;
+
+                // Parse the response as JSON and set the featured projects state with the loaded content.
+                const projects = await response.json() as PortfolioProject[];
+
+                // Save the loaded content to the featured projects state.
+                setFeaturedProjects( projects );
+            };
+
+            void loadFeaturedProjects();
+
+            return () => controller.abort();
+        },
+        []
+    );
 
     return (
         <Stack
@@ -38,14 +69,14 @@ export const HomeScreen = () =>
             { /* Large Signature at the top. */ }
             <Image
                 className='d-none d-md-flex'
-                src='/signature.svg'
+                src='/icons/signature.svg'
                 alt='Alan Otoniel Garcia Hernandez'
             />
 
             { /* Small Signature at the top. */ }
             <Image
                 className='d-flex d-md-none'
-                src='/signature-square.svg'
+                src='/icons/signature-square.svg'
                 alt='Alan Otoniel Garcia Hernandez'
             />
             
@@ -63,7 +94,7 @@ export const HomeScreen = () =>
                     <Card.Body className='p-3'>
                         <Image
                             className='w-100'
-                            src='/pfp.jpg'
+                            src='/images/pfp.jpg'
                             alt='Profile Picture'
                             fluid
                             rounded
@@ -128,35 +159,28 @@ export const HomeScreen = () =>
                     direction='horizontal'
                     gap={ 3 }
                 >
-                    {
-                        portfolioProjects.map( 
-                            ( project: PortfolioProject, index: number ) =>
-                                <Card
-                                    key={ index }
-                                    as='a'
-                                    href={ portfolioProjectsLinks[ index ] }
-                                    target='_blank'
-                                    rel='noreferrer'
-                                    className='hover-lift-card bg-body-tertiary border border-secondary-subtle rounded-4 shadow-sm text-decoration-none'
-                                    style={ { maxWidth: '24rem' } }
+                    { /* Map over the featured projects data to create project cards. */ }
+                    { featuredProjects.map( ( project, index: number ) => (
+                        <Card
+                            key={ index }
+                            as='a'
+                            href={ project.link }
+                            target='_blank'
+                            rel='noreferrer'
+                            className='hover-lift-card bg-body-tertiary border border-secondary-subtle rounded-4 shadow-sm text-decoration-none'
+                            style={ { maxWidth: '24rem' } }
+                        >
+                            <Card.Img src={ project.image } />
+                            <Card.ImgOverlay>
+                                <Badge
+                                    className='text-wrap'
+                                    bg='dark'
                                 >
-                                    <Card.Body>
-                                        <Card.Title>{ project.name }</Card.Title>
-
-                                        <Card.Text className='mb-3'>
-                                            { project.description }
-                                        </Card.Text>
-
-                                        <Badge
-                                            className='text-wrap'
-                                            bg='secondary'
-                                        >
-                                            { project.technologies }
-                                        </Badge>
-                                    </Card.Body>
-                                </Card>
-                        )
-                    }
+                                    { project.technologies }
+                                </Badge>
+                            </Card.ImgOverlay>
+                        </Card>
+                    ) ) }
                 </Stack>
             </section>
 

@@ -4,49 +4,106 @@
 // Import localization hook.
 import { useTranslation } from 'react-i18next';
 
+// Import React hooks.
+import { useEffect, useState } from 'react';
+
 // Import React Bootstrap components.
 import { Table } from 'react-bootstrap';
 
-// Import Certified Courses links data.
-import { certifiedCoursesLinks } from '../data/CertifiedCourses';
-
-// Import Portfolio Projects links data.
-import { portfolioProjectsLinks } from '../data/PortfolioProjects';
-
 // Import types.
-import type { CertifiedCourse, EducationSchool, FreelanceExperience, PortfolioProject } from '../models';
+import type { EducationSchool, FreelanceExperience, CertifiedCourse, PortfolioProject, CurriculumVitaeContent } from '../models';
+
+// Empty curriculum vitae content to use as initial state before loading the actual content.
+const emptyCurriculumVitaeContent: CurriculumVitaeContent =
+{
+    education:
+    {
+        title: '',
+        schools: []
+    },
+    freelanceExperience:
+    {
+        title: '',
+        experiences: []
+    },
+    certifiedCourses:
+    {
+        title: '',
+        courses: []
+    },
+    interests:
+    {
+        title: '',
+        description: ''
+    },
+    abilities:
+    {
+        title: '',
+        list: []
+    },
+    portfolioProjects:
+    {
+        title: '',
+        projects: []
+    }
+};
+
 
 export const CurriculumVitaeScreen = () =>
 {
-    // Translation hook to get the translation function for the current language.
-    const { t } = useTranslation();
+    // Translation hook to read the current active language.
+    const { i18n } = useTranslation();
 
-    // Education data from translation array.
-    const education = t( 'cv.education.schools', { returnObjects: true } ) as EducationSchool[];
+    // State to hold the curriculum vitae content loaded from the public folder at runtime.
+    const [ curriculumVitae, setCurriculumVitae ] = useState< CurriculumVitaeContent >( emptyCurriculumVitaeContent );
 
-    // Freelance Experience data from translation array.
-    const freelanceExperience = t( 'cv.freelanceExperience.experiences', { returnObjects: true } ) as FreelanceExperience[];
+    useEffect(
+        () =>
+        {
+            // AbortController to cancel the fetch request if the component unmounts or if the language changes before the request completes.
+            const controller = new AbortController();
 
-    // Certified Courses data from translation array.
-    const certifiedCourses = t( 'cv.certifiedCourses.courses', { returnObjects: true } ) as CertifiedCourse[];
+            const loadCurriculumVitae = async () =>
+            {
+                // The curriculum vitae content is stored in a JSON file in the public folder, with a separate file for each supported language.
+                // The file is loaded at runtime based on the current active language.
+                const localizedPath = `/locale/${ i18n.resolvedLanguage }/CurriculumVitae.json`;
 
-    // Abilities data from translation array.
-    const abilities = t( 'cv.abilities.list', { returnObjects: true } ) as string[];
+                // Fetch the curriculum vitae content from the public folder.
+                const response = await fetch(
+                    localizedPath,
+                    { signal: controller.signal }
+                );
 
-    // Portfolio Projects data from translation array.
-    const portfolioProjects = t( 'cv.portfolioProjects.projects', { returnObjects: true } ) as PortfolioProject[];
+                // If the response is not OK, return.
+                if ( !response.ok ) return;
+
+                // Parse the response as JSON and set the curriculum vitae state with the loaded content.
+                const content = await response.json() as CurriculumVitaeContent;
+
+                // Save the loaded content to the curriculum vitae state.
+                setCurriculumVitae( content );
+            };
+
+            void loadCurriculumVitae();
+
+            return () => controller.abort();
+        },
+        [ i18n.language ]
+    );
+
 
     return (
         <Table className='table-transparent'>
             <tbody>
                 { /* Education Section */ }
                 <tr>
-                    <th>{ t( 'cv.education.title' ) }</th>
+                    <th>{ curriculumVitae.education.title }</th>
 
                     <td>
                         { /* Map over the education data to create education entries. */ }
                         {
-                            education.map(
+                            curriculumVitae.education.schools.map(
                                 ( school: EducationSchool, index: number ) =>
                                     <div
                                         key={ index }
@@ -67,12 +124,12 @@ export const CurriculumVitaeScreen = () =>
                 
                 { /* Freelance Experience Section */ }
                 <tr>
-                    <th>{ t( 'cv.freelanceExperience.title' ) }</th>
+                    <th>{ curriculumVitae.freelanceExperience.title }</th>
 
                     <td>
                         { /* Map over the freelance experience data to create experience entries. */ }
                         {
-                            freelanceExperience.map(
+                            curriculumVitae.freelanceExperience.experiences.map(
                                 ( experience: FreelanceExperience, index: number ) =>
                                     <div
                                         key={ index }
@@ -95,12 +152,12 @@ export const CurriculumVitaeScreen = () =>
                 
                 { /* Certified Courses Section */ }
                 <tr>
-                    <th>{ t( 'cv.certifiedCourses.title' ) }</th>
+                    <th>{ curriculumVitae.certifiedCourses.title }</th>
 
                     <td>
                         { /* Map over the certified courses data to create course entries. */ }
                         {
-                            certifiedCourses.map(
+                            curriculumVitae.certifiedCourses.courses.map(
                                 ( course: CertifiedCourse, index: number ) =>
                                     <div
                                         key={ index }
@@ -113,11 +170,11 @@ export const CurriculumVitaeScreen = () =>
                                         <span>{ course.period }</span><br />
                                         
                                         <a
-                                            href={ certifiedCoursesLinks[ index ] }
+                                            href={ course.link }
                                             target='_blank'
                                             rel='noopener noreferrer'
                                         >
-                                            { certifiedCoursesLinks[ index ] }
+                                            { course.link }
                                         </a>
                                     </div>
                             )
@@ -127,21 +184,21 @@ export const CurriculumVitaeScreen = () =>
                 
                 { /* Interests Section */ }
                 <tr>
-                    <th>{ t( 'cv.interests.title' ) }</th>
+                    <th>{ curriculumVitae.interests.title }</th>
 
                     <td>
-                        <b>{ t( 'cv.interests.description' ) }</b>
+                        <b>{ curriculumVitae.interests.description }</b>
                     </td>
                 </tr>
                 
                 { /* Abilities Section */ }
                 <tr>
-                    <th>{ t( 'cv.abilities.title' ) }</th>
+                    <th>{ curriculumVitae.abilities.title }</th>
 
                     <td>
                         { /* Map over the abilities data to create ability entries. */ }
                         {
-                            abilities.map(
+                            curriculumVitae.abilities.list.map(
                                 ( ability: string, index: number ) =>
                                     <div
                                         key={ index }
@@ -156,11 +213,11 @@ export const CurriculumVitaeScreen = () =>
 
                 { /* Portfolio Projects Section */ }
                 <tr>
-                    <th>{ t( 'cv.portfolioProjects.title' ) }</th>
+                    <th>{ curriculumVitae.portfolioProjects.title }</th>
 
                     <td>
                         {
-                        portfolioProjects.map(
+                            curriculumVitae.portfolioProjects.projects.map(
                                 ( project: PortfolioProject, index: number ) =>
                                     <div
                                         key={ index }
@@ -171,11 +228,11 @@ export const CurriculumVitaeScreen = () =>
                                         <span className='fw-bold'>{ project.technologies }</span><br />
 
                                         <a
-                                            href={ portfolioProjectsLinks[ index ] }
+                                            href={ project.link }
                                             target='_blank'
                                             rel='noopener noreferrer'
                                         >
-                                            { portfolioProjectsLinks[ index ] }
+                                            { project.link }
                                         </a><br />
                                         
                                         { project.description }<br />

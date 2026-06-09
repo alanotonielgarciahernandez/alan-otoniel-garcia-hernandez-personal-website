@@ -29,21 +29,29 @@ export const contactEnglish =
         
         topics: [
             {
+                icon: 'bi-code-slash',
+
                 name: 'Software Development',
 
                 description: 'I am open to discussing software development projects, including web development, application development, and software engineering best practices.',
             },
             {
+                icon: 'bi-people-fill',
+
                 name: 'Collaboration Opportunities',
 
                 description: 'I am interested in collaborating on software projects, whether it be open-source contributions, freelance work, or team projects.',
             },
             {
+                icon: 'bi-question-circle',
+
                 name: 'Technical Conversations',
 
                 description: 'I enjoy engaging in technical discussions about programming languages, frameworks, tools, and industry trends.',
             },
             {
+                icon: 'bi-chat-dots',
+
                 name: 'General Inquiries',
                 
                 description: 'Feel free to reach out for any general questions or information about my work.',
@@ -105,19 +113,31 @@ export const contactSpanish =
         topics:
         [
             {
+                icon: 'bi-code-slash',
+
                 name: 'Desarrollo de Software',
+
                 description: 'Estoy abierto a discutir proyectos de desarrollo de software, incluyendo desarrollo web, desarrollo de aplicaciones y mejores prácticas de ingeniería de software.',
             },
             {
+                icon: 'bi-people-fill',
+
                 name: 'Oportunidades de Colaboración',
+
                 description: 'Estoy interesado en colaborar en proyectos de software, ya sea contribuciones de código abierto, trabajo freelance o proyectos en equipo.',
             },
             {
+                icon: 'bi-question-circle',
+
                 name: 'Conversaciones Técnicas',
+
                 description: 'Disfruto participar en discusiones técnicas sobre lenguajes de programación, frameworks, herramientas y tendencias de la industria.',
             },
             {
+                icon: 'bi-chat-dots',
+
                 name: 'Consultas Generales',
+                
                 description: 'No dudes en contactarme para cualquier pregunta general o información sobre mi trabajo.',
             },
         ],

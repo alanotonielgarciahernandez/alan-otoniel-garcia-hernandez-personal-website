@@ -15,9 +15,6 @@ import { globalData } from '../data/Global';
 // Import social links data.
 import { socialLinks } from '../data/SocialMedia';
 
-// Import contact topics data.
-import { contactTopicIcons } from '../data/ContactInformation';
-
 // Import types.
 import type { ContactTopic, SocialLink } from '../models';
     
@@ -145,7 +142,7 @@ export const ContactScreen = () =>
                                     style={ { maxWidth: '20rem' } }
                                 >
                                     <Card.Title>
-                                        <i className={ `bi ${ contactTopicIcons[ index ] } fs-2` } />
+                                        <i className={ `bi ${ topic.icon } fs-2` } />
                                     </Card.Title>
 
                                     <Card.Body>

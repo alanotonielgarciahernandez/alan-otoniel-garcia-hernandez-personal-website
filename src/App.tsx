@@ -7,6 +7,9 @@ import { useState } from 'react';
 // Import React Router components.
 import { Outlet } from 'react-router';
 
+// Import localization hook.
+import { useTranslation } from 'react-i18next';
+
 // Import React Bootstrap components.
 import { Button, Container, Offcanvas, Stack } from 'react-bootstrap';
 
@@ -17,6 +20,17 @@ export const App = () =>
 {
   // State to control the visibility of the mobile navigation offcanvas.
   const [ showMobileNav, setShowMobileNav ] = useState( false );
+
+  // Translation hook to read and change the active language.
+  const { i18n } = useTranslation();
+
+  // Toggle between the two supported languages.
+  const toggleLanguage = () =>
+  {
+    const nextLanguage = i18n.resolvedLanguage === 'en' ? 'es' : 'en';
+
+    i18n.changeLanguage( nextLanguage );
+  }
 
   return (
     <>
@@ -34,9 +48,19 @@ export const App = () =>
 
         { /* Content on the right. */ }
         <Container
-          className='bg-body-secondary rounded-5 m-3 m-lg-5 p-5'
+          className='bg-body-secondary rounded-5 m-3 m-lg-5 p-5 position-relative'
           fluid
         >
+          { /* Floating translate button. */ }
+          <Button
+            variant='dark'
+            className='position-absolute top-0 end-0 m-3'
+            onClick={ toggleLanguage }
+          >
+            <i className='bi bi-translate me-2' />
+            { i18n.resolvedLanguage === 'en' ? 'EN' : 'ES' }
+          </Button>
+
           { /* Mobile menu trigger. */ }
           <div className='d-lg-none mb-3'>
             <Button

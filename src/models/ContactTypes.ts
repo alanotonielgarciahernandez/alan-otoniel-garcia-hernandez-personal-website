@@ -1,13 +1,6 @@
 // ContactTypes.ts
 // Contact type definitions for the project.
 
-// Type for external links data.
-export type ExternalLink =
-{
-    name: string,
-    href: string,
-}
-
 // Type for social media links data.
 export type SocialLink =
 {
@@ -19,6 +12,7 @@ export type SocialLink =
 // Type for contact topics data.
 export type ContactTopic =
 {
+    icon: string,
     name: string,
     description: string,
 }
