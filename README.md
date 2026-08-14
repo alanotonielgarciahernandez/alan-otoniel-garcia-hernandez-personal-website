@@ -53,6 +53,9 @@ This project is a simple web application where you can navigate through specific
 ## Home Page.
 Contains an introduction about me, including general information about my work.
 
+## Posts Page.
+Contains a list of personal posts. Each post can be opened to read its full content.
+
 ## Curriculum Vitae Page.
 Contains my professional career history, including my education, previous experience, certified courses, and portfolio projects.
 Content is read from a separated localized JSON files to make it easier to maintain and update in the future.

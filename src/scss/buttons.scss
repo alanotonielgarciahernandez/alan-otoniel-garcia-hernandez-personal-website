@@ -9,3 +9,54 @@
 {
   background-color: rgba( 255, 255, 255, 0.1 ); /* tweak alpha/color as needed */
 }
+
+.list-group-item-action.post
+{
+  background-color: transparent;
+  border-radius: 10px; 
+}
+.list-group-item-action.post:hover
+{
+  background-color: rgba( 255, 255, 255, 0.1 ); /* tweak alpha/color as needed */
+}
+.list-group-item-action.post.active
+{
+  background-color: rgba( 0, 0, 0, 0.2 ); /* tweak alpha/color as needed */
+}
+
+.posts-page
+{
+  width: 100%;
+}
+
+.posts-sidebar
+{
+  width: 100%;
+  max-height: 78vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.posts-sidebar-column
+{
+  position: relative;
+}
+
+.posts-content-column
+{
+  min-width: 0;
+}
+
+@media ( max-width: 767.98px )
+{
+  .posts-sidebar
+  {
+    max-height: none;
+    padding-right: 0;
+  }
+
+  .list-group-item-action.post
+  {
+    border-radius: 12px;
+  }
+}

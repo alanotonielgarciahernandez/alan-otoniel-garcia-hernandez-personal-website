@@ -10,6 +10,8 @@ import { initReactI18next } from 'react-i18next';
 import { navigationEnglish, navigationSpanish } from './NavigationLocale';
 import { homeEnglish, homeSpanish } from './HomeLocale';
 import { contactEnglish, contactSpanish } from './ContactLocale';
+import { postsEnglish, postsSpanish } from './PostsLocale';
+import { cvEnglish, cvSpanish } from './CVLocale';
 
 i18n
 .use( initReactI18next )
@@ -32,6 +34,12 @@ i18n
           // Home page content.
           home: homeEnglish,
 
+          // Posts page content.
+          posts: postsEnglish,
+
+          // Curriculum Vitae page content.
+          cv: cvEnglish,
+
           // Contact page content.
           contact: contactEnglish,
         }
@@ -48,6 +56,12 @@ i18n
 
           // Home page content.
           home: homeSpanish,
+
+          // Posts page content.
+          posts: postsSpanish,
+
+          // Curriculum Vitae page content.
+          cv: cvSpanish,
 
           // Contact page content.
           contact: contactSpanish,

@@ -6,7 +6,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 // Import screens.
 import { App } from '../App';;
-import { HomeScreen, ContactScreen, CurriculumVitaeScreen } from '../screens';
+import { HomeScreen, ContactScreen, CurriculumVitaeScreen, PostsScreen } from '../screens';
 
 // App router that manages the history stack.
 export const router = createBrowserRouter
@@ -35,6 +35,26 @@ export const router = createBrowserRouter
           // Contact Screen.
           path: 'contact',
           element: <ContactScreen />,
+        },
+        {
+          // Posts Screen.
+          path: 'posts',
+          element: <PostsScreen />,
+
+          loader: () =>
+          {
+            return {};
+          }
+        },
+        {
+          // Posts Screen.
+          path: 'posts/:id',
+          element: <PostsScreen />,
+
+          loader: ( { params } ) =>
+          {
+            return params;
+          }
         },
         {
           // Catch-all route that redirects to the Home Screen for any undefined paths.

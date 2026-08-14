@@ -4,3 +4,4 @@
 export * from './ContactScreen';
 export * from './CurriculumVitaeScreen';
 export * from './HomeScreen';
+export * from './PostsScreen';

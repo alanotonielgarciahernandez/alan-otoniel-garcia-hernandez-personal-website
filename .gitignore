@@ -1,3 +1,9 @@
+# Localized files
+/public/*
+!/public/icons/
+/public/icons/*
+!/public/icons/*.svg
+
 # Logs
 logs
 *.log

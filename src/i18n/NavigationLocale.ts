@@ -5,6 +5,8 @@ export const navigationEnglish =
 {
     home: 'Home',
 
+    posts: 'Posts',
+
     curriculumVitae: 'Curriculum Vitae',
 
     contact: 'Contact',
@@ -13,6 +15,8 @@ export const navigationEnglish =
 export const navigationSpanish =
 {
     home: 'Inicio',
+
+    posts: 'Publicaciones',
 
     curriculumVitae: 'Currículum Vitae',
     

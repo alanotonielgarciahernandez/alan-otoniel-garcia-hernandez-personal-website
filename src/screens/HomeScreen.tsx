@@ -30,6 +30,7 @@ export const HomeScreen = () =>
 
     // State to hold the featured projects content loaded from the public folder at runtime.
     const [ featuredProjects, setFeaturedProjects ] = useState< PortfolioProject[] >( [] );
+    const [ hasFeaturedProjectsError, setHasFeaturedProjectsError ] = useState<boolean>( false );
 
     useEffect(
         () =>
@@ -39,20 +40,44 @@ export const HomeScreen = () =>
 
             const loadFeaturedProjects = async () =>
             {
-                // Fetch the featured projects content from the public folder.
-                const response = await fetch(
-                    '/FeaturedProjects.json',
-                    { signal: controller.signal }
-                );
+                try
+                {
+                    // Fetch the featured projects content from the public folder.
+                    const response = await fetch(
+                        '/FeaturedProjects.json',
+                        { signal: controller.signal }
+                    );
 
-                // If the response is not OK, return.
-                if ( !response.ok ) return;
+                    // If the response is not OK, stop and keep the list empty.
+                    if ( !response.ok )
+                    {
+                        setFeaturedProjects( [] );
+                        setHasFeaturedProjectsError( true );
+                        return;
+                    }
 
-                // Parse the response as JSON and set the featured projects state with the loaded content.
-                const projects = await response.json() as PortfolioProject[];
+                    // Parse the response as JSON and validate it before use.
+                    const projects = await response.json() as unknown;
 
-                // Save the loaded content to the featured projects state.
-                setFeaturedProjects( projects );
+                    if ( !Array.isArray( projects ) )
+                    {
+                        setFeaturedProjects( [] );
+                        setHasFeaturedProjectsError( true );
+                        return;
+                    }
+
+                    // Save the loaded content to the featured projects state.
+                    setFeaturedProjects( projects as PortfolioProject[] );
+                    setHasFeaturedProjectsError( false );
+                }
+                catch ( error )
+                {
+                    if ( controller.signal.aborted ) return;
+
+                    console.error( 'Error loading featured projects:', error );
+                    setFeaturedProjects( [] );
+                    setHasFeaturedProjectsError( true );
+                }
             };
 
             void loadFeaturedProjects();
@@ -61,6 +86,8 @@ export const HomeScreen = () =>
         },
         []
     );
+
+    const shouldRenderFeaturedProjects = featuredProjects.length > 0 && !hasFeaturedProjectsError;
 
     return (
         <Stack
@@ -149,40 +176,42 @@ export const HomeScreen = () =>
             </Stack>
 
             { /* Featured projects section. */ }
-            <section>
-                <h2 className='h4 mb-3'>
-                    { t( 'home.featuredProjects.title' ) }
-                </h2>
+            { shouldRenderFeaturedProjects && (
+                <section>
+                    <h2 className='h4 mb-3'>
+                        { t( 'home.featuredProjects.title' ) }
+                    </h2>
 
-                <Stack
-                    className='flex-wrap'
-                    direction='horizontal'
-                    gap={ 3 }
-                >
-                    { /* Map over the featured projects data to create project cards. */ }
-                    { featuredProjects.map( ( project, index: number ) => (
-                        <Card
-                            key={ index }
-                            as='a'
-                            href={ project.link }
-                            target='_blank'
-                            rel='noreferrer'
-                            className='hover-lift-card bg-body-tertiary border border-secondary-subtle rounded-4 shadow-sm text-decoration-none'
-                            style={ { maxWidth: '24rem' } }
-                        >
-                            <Card.Img src={ project.image } />
-                            <Card.ImgOverlay>
-                                <Badge
-                                    className='text-wrap'
-                                    bg='dark'
-                                >
-                                    { project.technologies }
-                                </Badge>
-                            </Card.ImgOverlay>
-                        </Card>
-                    ) ) }
-                </Stack>
-            </section>
+                    <Stack
+                        className='flex-wrap'
+                        direction='horizontal'
+                        gap={ 3 }
+                    >
+                        { /* Map over the featured projects data to create project cards. */ }
+                        { featuredProjects.map( ( project, index: number ) => (
+                            <Card
+                                key={ index }
+                                as='a'
+                                href={ project.link }
+                                target='_blank'
+                                rel='noreferrer'
+                                className='hover-lift-card bg-body-tertiary border border-secondary-subtle rounded-4 shadow-sm text-decoration-none'
+                                style={ { maxWidth: '24rem' } }
+                            >
+                                <Card.Img src={ project.image } />
+                                <Card.ImgOverlay>
+                                    <Badge
+                                        className='text-wrap'
+                                        bg='dark'
+                                    >
+                                        { project.technologies }
+                                    </Badge>
+                                </Card.ImgOverlay>
+                            </Card>
+                        ) ) }
+                    </Stack>
+                </section>
+            ) }
 
             { /* Social links section. */ }
             <section>

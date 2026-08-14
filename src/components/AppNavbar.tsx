@@ -16,7 +16,8 @@ type AppNavbarProps =
     onNavigate?: () => void;
 }
 
-export const AppNavbar = ( { onNavigate }: AppNavbarProps ) => {
+export const AppNavbar = ( { onNavigate }: AppNavbarProps ) =>
+{
     // React Router navigate function to change routes programmatically.
     const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ export const AppNavbar = ( { onNavigate }: AppNavbarProps ) => {
     const activeTab =
         location.pathname === '/cv' ? 'cv' :
         location.pathname === '/contact' ? 'contact' :
-        location.pathname === '/test' ? 'test' :
+        location.pathname.startsWith( '/posts' ) ? 'posts' :
         '/';
 
     // Function to handle navigation and call the onNavigate callback if provided.
@@ -67,6 +68,15 @@ export const AppNavbar = ( { onNavigate }: AppNavbarProps ) => {
                     onClick= { () => handleNavigate( '/' ) }
                 >
                     { t( 'nav.home' ) }
+                </Nav.Link>
+
+                { /* Posts navigation button. */ }
+                <Nav.Link
+                    className='text-body'
+                    active={ activeTab === 'posts' }
+                    onClick= { () => handleNavigate( 'posts' ) }
+                >
+                    { t( 'nav.posts' ) }
                 </Nav.Link>
 
                 { /* Curriculum Vitae navigation button. */ }
