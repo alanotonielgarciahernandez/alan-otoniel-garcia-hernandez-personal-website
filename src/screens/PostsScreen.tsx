@@ -101,14 +101,16 @@ export const PostsScreen = () =>
         }
 
         const numeric = Number( id );
-        if ( !isNaN( numeric ) && numeric >= 0 && numeric < postEntries.length )
+        if ( Number.isInteger( numeric ) && numeric >= 0 && numeric < postEntries.length )
         {
             setSelectedPost( numeric );
             return;
         }
 
         setSelectedPost( 0 );
-    }, [ id, postEntries ] );
+        void navigate( `/posts/${ postEntries[ 0 ].id }`, { replace: true } );
+    }, [ id, navigate, postEntries ] );
+    
 
     if ( isLoading )
     {
