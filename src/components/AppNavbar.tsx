@@ -11,8 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, Image, Nav } from 'react-bootstrap';
 
 // Props for the AppNavbar component.
-type AppNavbarProps =
-{
+interface AppNavbarProps {
     onNavigate?: () => void;
 }
 
@@ -36,7 +35,7 @@ export const AppNavbar = ( { onNavigate }: AppNavbarProps ) =>
 
     // Function to handle navigation and call the onNavigate callback if provided.
     const handleNavigate = ( path: string ) => {
-        navigate( path );
+        void navigate( path );
         onNavigate?.();
     }
 
@@ -45,7 +44,7 @@ export const AppNavbar = ( { onNavigate }: AppNavbarProps ) =>
             { /* Signature at the top. */ }
             <a
                 className='d-flex flex-column align-items-center'
-                onClick= { () => handleNavigate( '/' ) }
+                onClick= { () => { handleNavigate( '/' ); } }
             >
                 <Image
                     src='/icons/signature-nav.svg'
@@ -65,7 +64,7 @@ export const AppNavbar = ( { onNavigate }: AppNavbarProps ) =>
                 <Nav.Link
                     className='text-body'
                     active={ activeTab === '/' }
-                    onClick= { () => handleNavigate( '/' ) }
+                    onClick= { () => { handleNavigate( '/' ); } }
                 >
                     { t( 'nav.home' ) }
                 </Nav.Link>
@@ -74,7 +73,7 @@ export const AppNavbar = ( { onNavigate }: AppNavbarProps ) =>
                 <Nav.Link
                     className='text-body'
                     active={ activeTab === 'posts' }
-                    onClick= { () => handleNavigate( 'posts' ) }
+                    onClick= { () => { handleNavigate( 'posts' ); } }
                 >
                     { t( 'nav.posts' ) }
                 </Nav.Link>
@@ -83,7 +82,7 @@ export const AppNavbar = ( { onNavigate }: AppNavbarProps ) =>
                 <Nav.Link
                     className='text-body'
                     active={ activeTab === 'cv' }
-                    onClick= { () => handleNavigate( 'cv' ) }
+                    onClick= { () => { handleNavigate( 'cv' ); } }
                 >
                     { t( 'nav.curriculumVitae' ) }
                 </Nav.Link>
@@ -92,7 +91,7 @@ export const AppNavbar = ( { onNavigate }: AppNavbarProps ) =>
                 <Nav.Link
                     className='text-body'
                     active={ activeTab === 'contact' }
-                    onClick= { () => handleNavigate( 'contact' ) }
+                    onClick= { () => { handleNavigate( 'contact' ); } }
                 >
                     { t( 'nav.contact' ) }
                 </Nav.Link>

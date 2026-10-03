@@ -18,7 +18,14 @@ import './scss/styles.scss';
 import './i18n/i18n';
 
 // Define the element where React displays the components.
-ReactDOM.createRoot( document.getElementById( 'root' )! ).render(
+const rootElement = document.getElementById( 'root' );
+
+if ( !rootElement )
+{
+  throw new Error( 'Root element not found' );
+}
+
+ReactDOM.createRoot( rootElement ).render(
   <React.StrictMode>
     { /* Router component to render the appropiate UI. */ }
     <RouterProvider router={ router } />

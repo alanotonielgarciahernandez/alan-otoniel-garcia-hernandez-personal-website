@@ -27,15 +27,15 @@ import type { PostEntry } from '../models/PostsTypes';
 export const PostsScreen = () =>
 {
     // Get the post ID (slug or index) from the route loader data.
-    const loaderData = useLoaderData() as { id?: string } | undefined;
-    const { id } = loaderData || {};
+    const loaderData = useLoaderData<{ id?: string }>();
+    const { id } = loaderData;
 
     // Translation hook to read and change the active language.
     const { i18n, t } = useTranslation();
     const [ postEntries, setPostEntries ] = useState<PostEntry[]>( [] );
-    const [ selectedPost, setSelectedPost ] = useState<number>( 0 );
-    const [ isLoading, setIsLoading ] = useState<boolean>( true );
-    const [ hasError, setHasError ] = useState<boolean>( false );
+    const [ selectedPost, setSelectedPost ] = useState( 0 );
+    const [ isLoading, setIsLoading ] = useState( true );
+    const [ hasError, setHasError ] = useState( false );
 
     // React Router navigate function to change routes programmatically.
     const navigate = useNavigate();
@@ -71,7 +71,7 @@ export const PostsScreen = () =>
             }
         };
 
-        loadEntries();
+        void loadEntries();
 
         return () =>
         {
@@ -162,7 +162,7 @@ export const PostsScreen = () =>
                             onPostSelect={ ( postIndex ) =>
                         {
                             setSelectedPost( postIndex );
-                            navigate( `/posts/${ postEntries[ postIndex ].id }` );
+                            void navigate( `/posts/${ postEntries[ postIndex ].id }` );
                         }
                         }
                         />

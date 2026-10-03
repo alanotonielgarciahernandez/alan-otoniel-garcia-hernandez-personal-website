@@ -2,8 +2,7 @@
 // Curriculum Vitae type definitions for the project.
 
 // Type for education schools data.
-export type EducationSchool =
-{
+export interface EducationSchool {
     name: string,
     location: string,
     degree: string,
@@ -11,8 +10,7 @@ export type EducationSchool =
 }
 
 // Type for freelance experience data.
-export type FreelanceExperience =
-{
+export interface FreelanceExperience {
     role: string,
     technologies: string[],
     period: string,
@@ -21,8 +19,7 @@ export type FreelanceExperience =
 }
 
 // Type for certified courses data.
-export type CertifiedCourse =
-{
+export interface CertifiedCourse {
     name: string,
     instructor: string,
     period: string,
@@ -30,8 +27,7 @@ export type CertifiedCourse =
 }
 
 // Type for portfolio projects data.
-export type PortfolioProject =
-{
+export interface PortfolioProject {
     name: string,
     technologies: string[],
     description: string,
@@ -39,8 +35,7 @@ export type PortfolioProject =
     link: string,
 }
 
-export type CurriculumVitaeContent =
-{
+export interface CurriculumVitaeContent {
     education: {
         title: string,
         schools: EducationSchool[],

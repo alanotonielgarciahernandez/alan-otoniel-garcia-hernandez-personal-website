@@ -41,7 +41,7 @@ export const ContactScreen = () =>
     // Copy email to clipboard function.
     const copyEmailToClipboard = () =>
     {
-        navigator.clipboard.writeText( globalData.contactMail );
+        void navigator.clipboard.writeText( globalData.contactMail );
         setIsCopied( true );
 
         if ( copiedTimeoutRef.current !== null )
@@ -50,7 +50,7 @@ export const ContactScreen = () =>
         }
 
         copiedTimeoutRef.current = window.setTimeout(
-            () => setIsCopied( false ),
+            () => { setIsCopied( false ); },
             2000
         );
     }

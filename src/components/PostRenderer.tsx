@@ -67,8 +67,8 @@ export const PostRenderer = ( props: PostRendererProps ) =>
     const locale = i18n.resolvedLanguage === 'es' ? 'es' : 'en';
     const formattedDate = formatPostDate( props.post.date, locale );
     const [ content, setContent ] = useState< string | null >( null );
-    const [ isLoading, setIsLoading ] = useState< boolean >( true );
-    const [ hasError, setHasError ] = useState< boolean >( false );
+    const [ isLoading, setIsLoading ] = useState( true );
+    const [ hasError, setHasError ] = useState( false );
 
     useEffect( () =>
     {
@@ -96,7 +96,7 @@ export const PostRenderer = ( props: PostRendererProps ) =>
             setIsLoading( false );
         };
 
-        loadHtml();
+        void loadHtml();
 
         return () =>
         {

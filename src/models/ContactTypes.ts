@@ -2,16 +2,14 @@
 // Contact type definitions for the project.
 
 // Type for social media links data.
-export type SocialLink =
-{
+export interface SocialLink {
     name: string,
     href: string,
     icon: string,
 }
 
 // Type for contact topics data.
-export type ContactTopic =
-{
+export interface ContactTopic {
     icon: string,
     name: string,
     description: string,

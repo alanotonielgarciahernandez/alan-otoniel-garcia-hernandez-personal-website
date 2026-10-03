@@ -29,7 +29,7 @@ export const App = () =>
   {
     const nextLanguage = i18n.resolvedLanguage === 'en' ? 'es' : 'en';
 
-    i18n.changeLanguage( nextLanguage );
+    void i18n.changeLanguage( nextLanguage );
   }
 
   return (
@@ -65,7 +65,7 @@ export const App = () =>
           <div className='d-lg-none mb-3'>
             <Button
               variant='outline-light'
-              onClick={ () => setShowMobileNav( true ) }
+              onClick={ () => { setShowMobileNav( true ); } }
             >
               <i className='bi bi-list fs-5' />
             </Button>
@@ -79,7 +79,7 @@ export const App = () =>
         { /* Mobile navigation offcanvas. */ }
         <Offcanvas
           show={ showMobileNav }
-          onHide={ () => setShowMobileNav( false ) }
+          onHide={ () => { setShowMobileNav( false ); } }
           placement='start'
           className='bg-body-tertiary d-lg-none'
         >
@@ -87,7 +87,7 @@ export const App = () =>
           
           <Offcanvas.Body>
             { /* Mobile navigation component. */ }
-            <AppNavbar onNavigate={ () => setShowMobileNav( false ) } />
+            <AppNavbar onNavigate={ () => { setShowMobileNav( false ); } } />
           </Offcanvas.Body>
         </Offcanvas>
     </>

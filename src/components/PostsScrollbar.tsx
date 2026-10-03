@@ -15,7 +15,7 @@ export const PostsScrollbar = ( props: PostScrollbarProps ) =>
     const { t } = useTranslation();
 
     // Handle empty post list
-    if ( !props.postList || props.postList.length === 0 ) return null;
+    if ( props.postList.length === 0 ) return null;
 
     return (
         <ListGroup className='posts-scrollbar'>

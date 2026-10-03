@@ -30,7 +30,7 @@ export const HomeScreen = () =>
 
     // State to hold the featured projects content loaded from the public folder at runtime.
     const [ featuredProjects, setFeaturedProjects ] = useState< PortfolioProject[] >( [] );
-    const [ hasFeaturedProjectsError, setHasFeaturedProjectsError ] = useState<boolean>( false );
+    const [ hasFeaturedProjectsError, setHasFeaturedProjectsError ] = useState( false );
 
     useEffect(
         () =>
@@ -82,7 +82,7 @@ export const HomeScreen = () =>
 
             void loadFeaturedProjects();
 
-            return () => controller.abort();
+            return () => { controller.abort(); };
         },
         []
     );
@@ -162,14 +162,14 @@ export const HomeScreen = () =>
                 <Button
                     variant='outline-light'
                     size='lg'
-                    onClick={ () => navigate( 'cv' ) }
+                    onClick={ () => { void navigate( 'cv' ); } }
                 >
                     { t( 'home.quickActions.viewCv' ) }
                 </Button>
                 <Button
                     variant='light'
                     size='lg'
-                    onClick={ () => navigate( 'contact' ) }
+                    onClick={ () => { void navigate( 'contact' ); } }
                 >
                     { t( 'home.quickActions.contactMe' ) }
                 </Button>

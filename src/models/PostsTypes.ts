@@ -2,8 +2,7 @@
 // Posts type definitions for the project.
 
 // Post entry type, representing a single post with its path, title, and date.
-export type PostEntry =
-{
+export interface PostEntry {
     id: string,
     path: string,
     title: string,
@@ -13,27 +12,24 @@ export type PostEntry =
         time: number,
         unit: string
     },
-};
+}
 
 // Metadata entry loaded from locale index JSON files.
-export type PostIndexEntry =
-{
+export interface PostIndexEntry {
     id: string,
     path: string,
     title: string,
     datetime: string,
     format?: 'markdown' | 'html',
-};
+}
 
 // Props for the PostsScrollbar component, including the selected post index, a list of posts, and an optional callback for when a post is selected.
-export type PostScrollbarProps =
-{
+export interface PostScrollbarProps {
     selectedPost: number,
     postList: PostEntry[],
     onPostSelect?: ( postIndex: number ) => void,
-};
+}
 
-export type PostRendererProps =
-{
+export interface PostRendererProps {
     post: PostEntry,
 }

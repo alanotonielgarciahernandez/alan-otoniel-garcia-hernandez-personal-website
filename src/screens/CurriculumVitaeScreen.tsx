@@ -53,11 +53,12 @@ export const CurriculumVitaeScreen = () =>
 {
     // Translation hook to read the current active language.
     const { i18n, t } = useTranslation();
+    const currentLanguage = i18n.resolvedLanguage ?? 'en';
 
     // State to hold the curriculum vitae content loaded from the public folder at runtime.
-    const [ curriculumVitae, setCurriculumVitae ] = useState< CurriculumVitaeContent >( emptyCurriculumVitaeContent );
-    const [ isLoading, setIsLoading ] = useState<boolean>( true );
-    const [ hasError, setHasError ] = useState<boolean>( false );
+    const [ curriculumVitae, setCurriculumVitae ] = useState( emptyCurriculumVitaeContent );
+    const [ isLoading, setIsLoading ] = useState( true );
+    const [ hasError, setHasError ] = useState( false );
 
     useEffect(
         () =>
@@ -74,7 +75,7 @@ export const CurriculumVitaeScreen = () =>
                 {
                     // The curriculum vitae content is stored in a JSON file in the public folder, with a separate file for each supported language.
                     // The file is loaded at runtime based on the current active language.
-                    const localizedPath = `/locale/${ i18n.resolvedLanguage }/CurriculumVitae.json`;
+                    const localizedPath = `/locale/${ currentLanguage }/CurriculumVitae.json`;
 
                     // Fetch the curriculum vitae content from the public folder.
                     const response = await fetch(
@@ -115,18 +116,18 @@ export const CurriculumVitaeScreen = () =>
 
             void loadCurriculumVitae();
 
-            return () => controller.abort();
+            return () => { controller.abort(); };
         },
         [ i18n.language ]
     );
 
     const hasAnyContent = Boolean(
-        curriculumVitae.education?.schools?.length ||
-        curriculumVitae.freelanceExperience?.experiences?.length ||
-        curriculumVitae.certifiedCourses?.courses?.length ||
-        curriculumVitae.interests?.description ||
-        curriculumVitae.abilities?.list?.length ||
-        curriculumVitae.portfolioProjects?.projects?.length
+        curriculumVitae.education.schools.length ||
+        curriculumVitae.freelanceExperience.experiences.length ||
+        curriculumVitae.certifiedCourses.courses.length ||
+        curriculumVitae.interests.description ||
+        curriculumVitae.abilities.list.length ||
+        curriculumVitae.portfolioProjects.projects.length
     );
 
     if ( isLoading )

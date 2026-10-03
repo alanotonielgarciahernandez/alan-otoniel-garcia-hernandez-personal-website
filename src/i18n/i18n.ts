@@ -13,7 +13,7 @@ import { contactEnglish, contactSpanish } from './ContactLocale';
 import { postsEnglish, postsSpanish } from './PostsLocale';
 import { cvEnglish, cvSpanish } from './CVLocale';
 
-i18n
+void i18n
 .use( initReactI18next )
 // Detects browser language.
 .use( LanguageDetector )

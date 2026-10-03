@@ -10,7 +10,7 @@
  */
 const getLocaleUnit = ( locale: string, unit: string, interval: number ) =>
 {
-  var localeUnit = unit;
+  let localeUnit = unit;
 
   // Handle unit language.
   switch ( locale ) {
@@ -79,7 +79,7 @@ export const getTimeAgo = ( locale: string, providedDate: string ) =>
 {
   const seconds = Math.floor( ( new Date().getTime() - new Date( providedDate ).getTime() ) / 1000 );
 
-  var interval = seconds / 31536000;
+  let interval = seconds / 31536000;
 
   if ( interval > 1 ) {
     return { time: Math.floor( interval ), unit: getLocaleUnit( locale, 'year', interval ) };
