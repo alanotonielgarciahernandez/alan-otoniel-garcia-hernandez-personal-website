@@ -73,6 +73,10 @@ export const contactEnglish =
             sendButtonText: 'Send Email',
 
             copyButtonText: 'Copy Email',
+
+            copySuccessMessage: 'Email copied successfully.',
+
+            copyFailureMessage: 'Copy failed. Try again or copy manually: {{email}}.',
         },
 
         socialMedia:
@@ -157,6 +161,10 @@ export const contactSpanish =
             sendButtonText: 'Enviar Correo',
 
             copyButtonText: 'Copiar Correo',
+
+            copySuccessMessage: 'Correo copiado correctamente.',
+
+            copyFailureMessage: 'No se pudo copiar. Inténtalo de nuevo o copia manualmente: {{email}}.',
         },
 
         socialMedia:

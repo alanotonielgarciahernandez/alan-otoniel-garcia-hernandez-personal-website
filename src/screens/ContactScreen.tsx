@@ -20,10 +20,10 @@ import type { ContactTopic, SocialLink } from '../models';
     
 export const ContactScreen = () =>
 {
-    // State to change the copy button text when the email is copied to clipboard.
-    const [ isCopied, setIsCopied ] = useState( false );
+    // State to show feedback after attempting to copy the email.
+    const [ copyStatus, setCopyStatus ] = useState< 'idle' | 'success' | 'failure' >( 'idle' );
 
-    // Ref to reset the copy button text after a delay when the email is copied to clipboard.
+    // Ref to reset the copy feedback after a delay.
     const copiedTimeoutRef = useRef< number | null >( null );
 
     // Cleanup timeout on component unmount to prevent memory leaks.
@@ -39,20 +39,26 @@ export const ContactScreen = () =>
     }, [] );
 
     // Copy email to clipboard function.
-    const copyEmailToClipboard = () =>
+    const copyEmailToClipboard = async () =>
     {
-        void navigator.clipboard.writeText( globalData.contactMail );
-        setIsCopied( true );
-
         if ( copiedTimeoutRef.current !== null )
         {
             window.clearTimeout( copiedTimeoutRef.current );
         }
 
-        copiedTimeoutRef.current = window.setTimeout(
-            () => { setIsCopied( false ); },
-            2000
-        );
+        try {
+            await navigator.clipboard.writeText( globalData.contactMail );
+
+            setCopyStatus( 'success' );
+
+            copiedTimeoutRef.current = window.setTimeout(
+                () => { setCopyStatus( 'idle' ); },
+                2000
+            );
+        } catch
+        {
+            setCopyStatus( 'failure' );
+        }
     }
 
     // Translation hook to get the translation function for the current language.
@@ -212,15 +218,28 @@ export const ContactScreen = () =>
                                 { /* Copy email button */ }
                                 <Button
                                     variant='outline-light'
-                                    onClick={ copyEmailToClipboard }
+                                    onClick={ () => { void copyEmailToClipboard(); } }
                                 >
                                     <i className={ `bi bi-clipboard-fill me-2` } />
-                                    {
-                                        isCopied ?
-                                        <span>Copied!</span>
-                                        : <span>{ t( 'contact.contactInfo.email.copyButtonText' ) }</span>
-                                    }
+                                    { t( 'contact.contactInfo.email.copyButtonText' ) }
                                 </Button>
+
+                                {
+                                    copyStatus === 'success' &&
+                                    <span className='text-success-emphasis' role='status'>
+                                        { t( 'contact.contactInfo.email.copySuccessMessage' ) }
+                                    </span>
+                                }
+
+                                {
+                                    copyStatus === 'failure' &&
+                                    <span className='text-danger' role='alert'>
+                                        { t(
+                                            'contact.contactInfo.email.copyFailureMessage',
+                                            { email: globalData.contactMail }
+                                        ) }
+                                    </span>
+                                }
                             </Stack>
                         </Card.Footer>
                     </Card>
