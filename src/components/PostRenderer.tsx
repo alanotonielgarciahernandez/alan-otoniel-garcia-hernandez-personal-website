@@ -12,6 +12,7 @@ import remarkGfm from 'remark-gfm';
 // Import types.
 import { useTranslation } from 'react-i18next';
 import type { PostRendererProps } from '../models/PostsTypes';
+import { toSupportedLocale } from '../helpers/localeHelpers';
 
 /**
  * Safely loads and returns post content.
@@ -64,7 +65,7 @@ export const PostRenderer = ( props: PostRendererProps ) =>
 {
     // Translation hook to read and change the active language.
     const { i18n, t } = useTranslation();
-    const locale = i18n.resolvedLanguage === 'es' ? 'es' : 'en';
+    const locale = toSupportedLocale( i18n.resolvedLanguage );
     const formattedDate = formatPostDate( props.post.date, locale );
     const [ content, setContent ] = useState< string | null >( null );
     const [ isLoading, setIsLoading ] = useState( true );

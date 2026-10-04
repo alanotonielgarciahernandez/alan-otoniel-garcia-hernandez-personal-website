@@ -3,6 +3,7 @@
 
 // Import localization hook.
 import { useTranslation } from 'react-i18next';
+import { toSupportedLocale } from '../helpers/localeHelpers';
 
 // Import React hooks.
 import { useEffect, useState } from 'react';
@@ -53,7 +54,7 @@ export const CurriculumVitaeScreen = () =>
 {
     // Translation hook to read the current active language.
     const { i18n, t } = useTranslation();
-    const currentLanguage = i18n.resolvedLanguage ?? 'en';
+    const currentLanguage = toSupportedLocale( i18n.resolvedLanguage );
 
     // State to hold the curriculum vitae content loaded from the public folder at runtime.
     const [ curriculumVitae, setCurriculumVitae ] = useState( emptyCurriculumVitaeContent );

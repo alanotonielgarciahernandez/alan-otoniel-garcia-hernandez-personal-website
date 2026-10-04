@@ -3,6 +3,7 @@
 
 // Import helpers.
 import { getTimeAgo } from './timeHelpers';
+import { toSupportedLocale } from './localeHelpers';
 
 // Import types.
 import type { PostEntry, PostIndexEntry } from '../models/PostsTypes';
@@ -16,16 +17,6 @@ const isValidDate = ( dateString: string ): boolean =>
 {
     const date = new Date( dateString );
     return date instanceof Date && !isNaN( date.getTime() );
-};
-
-/**
- * Resolves the language to use for the posts.
- * @param language The language to resolve.
- * @returns The resolved language, defaulting to 'en' if not specified or invalid.
- */
-const resolveLanguage = ( language: string | undefined ): 'en' | 'es' =>
-{
-    return language === 'es' ? 'es' : 'en';
 };
 
 /**
@@ -57,7 +48,7 @@ export const getPostEntries = async ( language: string | undefined ): Promise< P
 {
     try
     {
-        const locale = resolveLanguage( language );
+        const locale = toSupportedLocale( language );
         const indexPath = `/locale/${ locale }/posts/index.json`;
         const response = await fetch( indexPath );
 

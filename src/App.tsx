@@ -2,7 +2,7 @@
 // Base component used in all pages.
 
 // Import React useState hook.
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Import React Router components.
 import { Outlet } from 'react-router';
@@ -15,6 +15,7 @@ import { Button, Container, Offcanvas, Stack } from 'react-bootstrap';
 
 // Import custom components.
 import { AppNavbar } from './components/AppNavbar';
+import { toSupportedLocale } from './helpers/localeHelpers';
 
 export const App = () =>
 {
@@ -23,11 +24,17 @@ export const App = () =>
 
   // Translation hook to read and change the active language.
   const { i18n } = useTranslation();
+  const currentLocale = toSupportedLocale( i18n.resolvedLanguage );
+
+  useEffect( () =>
+  {
+    document.documentElement.lang = currentLocale;
+  }, [ currentLocale ] );
 
   // Toggle between the two supported languages.
   const toggleLanguage = () =>
   {
-    const nextLanguage = i18n.resolvedLanguage === 'en' ? 'es' : 'en';
+    const nextLanguage = currentLocale === 'en' ? 'es' : 'en';
 
     void i18n.changeLanguage( nextLanguage );
   }
@@ -58,7 +65,7 @@ export const App = () =>
             onClick={ toggleLanguage }
           >
             <i className='bi bi-translate me-2' />
-            { i18n.resolvedLanguage === 'en' ? 'EN' : 'ES' }
+            { currentLocale === 'en' ? 'EN' : 'ES' }
           </Button>
 
           { /* Mobile menu trigger. */ }

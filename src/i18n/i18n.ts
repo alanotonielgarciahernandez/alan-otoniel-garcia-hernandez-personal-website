@@ -20,7 +20,9 @@ void i18n
 .init(
   {
     // Default localization.
+    supportedLngs: [ 'en', 'es' ],
     fallbackLng: 'en',
+    load: 'languageOnly',
     resources:
     {
       // English localization.
