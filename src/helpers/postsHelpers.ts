@@ -95,7 +95,7 @@ export const getPostEntries = async ( language: string | undefined ): Promise< P
                         title: entry.title,
                         format: entry.format ?? 'markdown',
                         date: date,
-                        datetime: getTimeAgo( locale, entry.datetime ),
+                        timeAgo: getTimeAgo( locale, entry.datetime ),
                     };
                 }
                 catch ( error )

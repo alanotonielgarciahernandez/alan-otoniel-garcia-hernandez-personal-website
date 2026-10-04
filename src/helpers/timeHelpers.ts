@@ -2,74 +2,6 @@
 // Gets the time that has passed from the provided date.
 
 /**
- * Gets the localized unit for a given time interval.
- * @param locale The locale to use for the localization.
- * @param unit The unit to localize.
- * @param interval The time interval.
- * @returns The localized unit.
- */
-const getLocaleUnit = ( locale: string, unit: string, interval: number ) =>
-{
-  let localeUnit = unit;
-
-  // Handle unit language.
-  switch ( locale ) {
-    case 'es':
-      switch ( unit ) {
-        case 'year':
-          localeUnit = 'año';
-
-          if ( interval > 1 ) localeUnit += 's';
-          
-          break;
-
-        case 'month':
-          localeUnit = 'mes';
-
-          if ( interval > 1 ) localeUnit += 'es';
-          
-          break;
-
-        case 'day':
-          localeUnit = 'día';
-
-          if ( interval > 1 ) localeUnit += 's';
-          
-          break;
-
-        case 'hour':
-          localeUnit = 'hora';
-
-          if ( interval > 1 ) localeUnit += 's';
-
-          break;
-
-        case 'minute':
-          localeUnit = 'minuto';
-
-          if ( interval > 1 ) localeUnit += 's';
-
-          break;
-
-        case 'second':
-          localeUnit = 'segundo';
-
-          if ( interval > 1 ) localeUnit += 's';
-
-          break;
-      }
-      break;
-      
-    default:
-      localeUnit = unit;
-
-      if ( interval > 1 ) localeUnit += 's';
-  }
-
-  return localeUnit;
-};
-
-/**
  * Calculates the time that has passed from the provided date.
  * @param locale The locale to use for the time calculation.
  * @param providedDate The date to calculate the time from.
@@ -81,29 +13,31 @@ export const getTimeAgo = ( locale: string, providedDate: string ) =>
 
   let interval = seconds / 31536000;
 
-  if ( interval > 1 ) {
-    return { time: Math.floor( interval ), unit: getLocaleUnit( locale, 'year', interval ) };
+  const rtf1 = new Intl.RelativeTimeFormat( locale );
+
+  if ( interval >= 1 ) {
+    return rtf1.format( -Math.floor( interval ), 'year' );
   }
 
   interval = seconds / 2592000;
-  if ( interval > 1 ) {
-    return { time: Math.floor( interval ), unit: getLocaleUnit( locale, 'month', interval ) };
+  if ( interval >= 1 ) {
+    return rtf1.format( -Math.floor( interval ), 'month' );
   }
 
   interval = seconds / 86400;
-  if ( interval > 1 ) {
-    return { time: Math.floor( interval ), unit: getLocaleUnit( locale, 'day', interval ) };
+  if ( interval >= 1 ) {
+    return rtf1.format( -Math.floor( interval ), 'day' );
   }
 
   interval = seconds / 3600;
-  if ( interval > 1 ) {
-    return { time: Math.floor( interval ), unit: getLocaleUnit( locale, 'hour', interval ) };
+  if ( interval >= 1 ) {
+    return rtf1.format( -Math.floor( interval ), 'hour' );
   }
 
   interval = seconds / 60;
-  if ( interval > 1 ) {
-    return { time: Math.floor( interval ), unit: getLocaleUnit( locale, 'minute', interval ) };
+  if ( interval >= 1 ) {
+    return rtf1.format( -Math.floor( interval ), 'minute' );
   }
 
-  return { time: Math.floor( seconds ), unit: getLocaleUnit( locale, 'second', seconds ) };
+  return rtf1.format( -Math.floor( seconds ), 'second' );
 }

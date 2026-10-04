@@ -8,10 +8,7 @@ export interface PostEntry {
     title: string,
     format: 'markdown' | 'html',
     date: Date,
-    datetime: {
-        time: number,
-        unit: string
-    },
+    timeAgo: string,
 }
 
 // Metadata entry loaded from locale index JSON files.
