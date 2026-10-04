@@ -2,7 +2,7 @@
 // Assigns each Page Component to a route.
 
 // Import React Router components.
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 // Import screens.
 import { App } from '../App';;
@@ -59,7 +59,7 @@ export const router = createBrowserRouter
         {
           // Catch-all route that redirects to the Home Screen for any undefined paths.
           path: '*',
-          element: <HomeScreen />,
+          element: <Navigate to='/' replace />,
         },
       ],
     },
