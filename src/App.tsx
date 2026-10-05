@@ -25,11 +25,41 @@ export const App = () =>
   // Translation hook to read and change the active language.
   const { i18n } = useTranslation();
   const currentLocale = toSupportedLocale( i18n.resolvedLanguage );
+  
 
   useEffect( () =>
   {
     document.documentElement.lang = currentLocale;
   }, [ currentLocale ] );
+
+  // Keep the mobile offcanvas state in sync when the viewport enters Bootstrap's lg breakpoint.
+  useEffect( () =>
+  {
+    const mediaQuery = window.matchMedia( '(min-width: 992px)' );
+
+    // Close the mobile menu when desktop navigation becomes available.
+    const handleBreakpointChange = ( event: MediaQueryListEvent ) =>
+    {
+      if ( event.matches )
+      {
+        setShowMobileNav( false );
+      }
+    };
+
+    // Also handle mounting while the viewport is already at the desktop breakpoint.
+    if ( mediaQuery.matches )
+    {
+      setShowMobileNav( false );
+    }
+
+    mediaQuery.addEventListener( 'change', handleBreakpointChange );
+
+    // Remove the listener when App unmounts to avoid retaining the callback.
+    return () =>
+    {
+      mediaQuery.removeEventListener( 'change', handleBreakpointChange );
+    };
+  }, [] );
 
   // Toggle between the two supported languages.
   const toggleLanguage = () =>
@@ -38,6 +68,7 @@ export const App = () =>
 
     void i18n.changeLanguage( nextLanguage );
   }
+
 
   return (
     <>
