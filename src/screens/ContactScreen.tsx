@@ -95,7 +95,7 @@ export const ContactScreen = () =>
                         style={ { maxWidth: '20rem' } }
                     >
                         <Card.Title>
-                            <i className={ 'bi bi-lightning-charge-fill fs-2 mb-3' } />
+                            <i className={ 'bi bi-lightning-charge-fill fs-2' } />
                         </Card.Title>
 
                         <Card.Body>
@@ -183,7 +183,7 @@ export const ContactScreen = () =>
                         style={ { maxWidth: '30rem' } }
                     >
                         <Card.Title>
-                            <i className={ 'bi bi-envelope-fill fs-2 mb-3' } />
+                            <i className={ 'bi bi-envelope-fill fs-2' } />
                         </Card.Title>
 
                         <Card.Body>
@@ -250,7 +250,7 @@ export const ContactScreen = () =>
                         style={ { maxWidth: '30rem' } }
                     >
                         <Card.Title>
-                            <i className={ 'bi bi-phone-fill fs-2 mb-3' } />
+                            <i className={ 'bi bi-phone-fill fs-2' } />
                         </Card.Title>
 
                         <Card.Body className='d-flex flex-column'>

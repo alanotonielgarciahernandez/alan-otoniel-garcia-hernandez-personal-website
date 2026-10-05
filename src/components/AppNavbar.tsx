@@ -10,12 +10,16 @@ import { useTranslation } from 'react-i18next';
 // Import React Bootstrap components.
 import { Button, Image, Nav } from 'react-bootstrap';
 
+import type { SupportedLocale } from '../helpers/localeHelpers';
+
 // Props for the AppNavbar component.
 interface AppNavbarProps {
+    currentLocale: SupportedLocale;
+    onLanguageToggle: () => void;
     onNavigate?: () => void;
 }
 
-export const AppNavbar = ( { onNavigate }: AppNavbarProps ) =>
+export const AppNavbar = ( { currentLocale, onLanguageToggle, onNavigate }: AppNavbarProps ) =>
 {
     // React Router navigate function to change routes programmatically.
     const navigate = useNavigate();
@@ -109,6 +113,15 @@ export const AppNavbar = ( { onNavigate }: AppNavbarProps ) =>
                 <i className='bi bi-box-arrow-up-right me-2' />
                 
                 Personal Projects
+            </Button>
+
+            { /* Language switcher. */ }
+            <Button
+                className='d-flex align-items-center mb-3 language-switcher'
+                onClick={ onLanguageToggle }
+            >
+                <i className='bi bi-translate me-2' />
+                { currentLocale === 'en' ? 'EN' : 'ES' }
             </Button>
 
             { /* Footer with copyright information. */ }

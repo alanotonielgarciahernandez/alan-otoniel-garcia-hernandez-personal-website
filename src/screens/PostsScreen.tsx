@@ -156,7 +156,7 @@ export const PostsScreen = () =>
         <Container fluid className='posts-page px-3 px-md-4 py-4'>
             <Row className='g-4 align-items-start'>
                 <Col xs={ 12 } md={ 4 } lg={ 3 } className='posts-sidebar-column'>
-                    <span className='fs-1 mb-3'>{ t( 'posts.title' ) }</span>
+                    <span className='fs-1'>{ t( 'posts.title' ) }</span>
                     <div className='posts-sidebar'>
                     <PostsScrollbar
                         postList={ postEntries }

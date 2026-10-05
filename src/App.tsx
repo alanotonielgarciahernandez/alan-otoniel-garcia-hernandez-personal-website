@@ -81,24 +81,17 @@ export const App = () =>
         <Container
           className='d-none d-lg-flex flex-column rounded-end-4 bg-body-tertiary position-sticky top-0 vh-100 overflow-auto p-3 w-auto'
         >
-          <AppNavbar />
+          <AppNavbar
+            currentLocale={ currentLocale }
+            onLanguageToggle={ toggleLanguage }
+          />
         </Container>
 
         { /* Content on the right. */ }
         <Container
-          className='bg-body-secondary rounded-5 m-3 m-lg-5 p-5 position-relative'
+          className='bg-body-secondary rounded-5 m-3 m-lg-5 p-5'
           fluid
         >
-          { /* Floating translate button. */ }
-          <Button
-            variant='dark'
-            className='position-absolute top-0 end-0 m-3'
-            onClick={ toggleLanguage }
-          >
-            <i className='bi bi-translate me-2' />
-            { currentLocale === 'en' ? 'EN' : 'ES' }
-          </Button>
-
           { /* Mobile menu trigger. */ }
           <div className='d-lg-none mb-3'>
             <Button
@@ -125,7 +118,11 @@ export const App = () =>
           
           <Offcanvas.Body>
             { /* Mobile navigation component. */ }
-            <AppNavbar onNavigate={ () => { setShowMobileNav( false ); } } />
+            <AppNavbar
+              currentLocale={ currentLocale }
+              onLanguageToggle={ toggleLanguage }
+              onNavigate={ () => { setShowMobileNav( false ); } }
+            />
           </Offcanvas.Body>
         </Offcanvas>
     </>
