@@ -25,7 +25,6 @@ const isValidFeaturedProject = ( value: unknown ): value is PortfolioProject =>
         project.technologies.every(
             ( technology ) => typeof technology === 'string' && technology.length > 0
         ) &&
-        typeof project.description === 'string' &&
         typeof project.image === 'string' && project.image.length > 0 &&
         typeof project.link === 'string' && project.link.length > 0
     );
