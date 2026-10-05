@@ -11,7 +11,7 @@ import remarkGfm from 'remark-gfm';
 
 // Import types.
 import { useTranslation } from 'react-i18next';
-import type { PostRendererProps } from '../models/PostsTypes';
+import type { PostRendererProps } from '../models';
 import { toSupportedLocale } from '../helpers/localeHelpers';
 
 /**

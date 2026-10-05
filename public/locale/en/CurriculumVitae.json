@@ -111,9 +111,11 @@
         "projects":
         [
             {
+                "id": "personal-projects",
+                
                 "name": "Alan Otoniel García Hernández Personal Projects.",
                 
-                "technologies": "JavaScript, React, SCSS, Go, GraphQL, MongoDB.",
+                "technologies": ["JavaScript", "React", "SCSS", "Go", "GraphQL", "MongoDB"],
                 
                 "description": "A web application similar to GitHub to share repositories source code.",
 

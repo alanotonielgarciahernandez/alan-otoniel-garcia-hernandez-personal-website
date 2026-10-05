@@ -289,7 +289,7 @@ export const CurriculumVitaeScreen = () =>
                                         >
                                             <span className='fw-bold'>{ project.name }</span><br />
 
-                                            <span className='fw-bold'>{ project.technologies }</span><br />
+                                            <span className='fw-bold'>{ project.technologies.join( ', ' ) }</span><br />
 
                                             <a
                                                 href={ project.link }

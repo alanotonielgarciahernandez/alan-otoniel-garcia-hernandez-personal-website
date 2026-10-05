@@ -21,7 +21,7 @@ import { PostsScrollbar } from '../components/PostsScrollbar';
 import { getPostEntries } from '../helpers/postsHelpers';
 
 // Import types.
-import type { PostEntry } from '../models/PostsTypes';
+import type { PostEntry } from '../models';
 
 
 export const PostsScreen = () =>

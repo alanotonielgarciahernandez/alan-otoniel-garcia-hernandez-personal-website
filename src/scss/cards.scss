@@ -1,3 +1,13 @@
+.featured-project-card {
+	width: min( 24rem, 100% );
+	aspect-ratio: 16 / 9;
+}
+
+.featured-project-card .card-img {
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+}
+
 .hover-lift-card {
 	transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
 	will-change: transform;

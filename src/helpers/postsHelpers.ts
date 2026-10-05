@@ -6,7 +6,7 @@ import { getTimeAgo } from './timeHelpers';
 import { toSupportedLocale } from './localeHelpers';
 
 // Import types.
-import type { PostEntry, PostIndexEntry } from '../models/PostsTypes';
+import type { PostEntry, PostIndexEntry } from '../models';
 
 /**
  * Validates if a date string is a valid date.

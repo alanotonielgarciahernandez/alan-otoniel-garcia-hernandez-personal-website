@@ -13,6 +13,9 @@ import { useNavigate } from 'react-router-dom';
 // Import React Bootstrap components.
 import { Badge, Button, Card, Image, Stack } from 'react-bootstrap';
 
+// Import helper functions.
+import { getFeaturedProjectEntries } from '../helpers/featuredProjectsHelpers';
+
 // Import social links data.
 import { socialLinks } from '../data/SocialMedia';
 
@@ -42,32 +45,10 @@ export const HomeScreen = () =>
             {
                 try
                 {
-                    // Fetch the featured projects content from the public folder.
-                    const response = await fetch(
-                        '/FeaturedProjects.json',
-                        { signal: controller.signal }
-                    );
-
-                    // If the response is not OK, stop and keep the list empty.
-                    if ( !response.ok )
-                    {
-                        setFeaturedProjects( [] );
-                        setHasFeaturedProjectsError( true );
-                        return;
-                    }
-
-                    // Parse the response as JSON and validate it before use.
-                    const projects = await response.json() as unknown;
-
-                    if ( !Array.isArray( projects ) )
-                    {
-                        setFeaturedProjects( [] );
-                        setHasFeaturedProjectsError( true );
-                        return;
-                    }
+                    const projects = await getFeaturedProjectEntries( controller.signal );
 
                     // Save the loaded content to the featured projects state.
-                    setFeaturedProjects( projects as PortfolioProject[] );
+                    setFeaturedProjects( projects );
                     setHasFeaturedProjectsError( false );
                 }
                 catch ( error )
@@ -195,16 +176,18 @@ export const HomeScreen = () =>
                                 href={ project.link }
                                 target='_blank'
                                 rel='noreferrer'
-                                className='hover-lift-card bg-body-tertiary border border-secondary-subtle rounded-4 shadow-sm text-decoration-none'
-                                style={ { maxWidth: '24rem' } }
+                                className='featured-project-card hover-lift-card bg-body-tertiary border border-secondary-subtle rounded-4 shadow-sm text-decoration-none'
                             >
-                                <Card.Img src={ project.image } />
+                                <Card.Img
+                                    src={ project.image }
+                                    alt={ project.name }
+                                />
                                 <Card.ImgOverlay>
                                     <Badge
                                         className='text-wrap'
                                         bg='dark'
                                     >
-                                        { project.technologies }
+                                        { project.technologies.join( ', ' ) }
                                     </Badge>
                                 </Card.ImgOverlay>
                             </Card>

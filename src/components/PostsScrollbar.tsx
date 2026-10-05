@@ -5,7 +5,7 @@
 import { ListGroup } from 'react-bootstrap';
 
 // Import types.
-import type { PostScrollbarProps } from '../models/PostsTypes';
+import type { PostScrollbarProps } from '../models';
 
 export const PostsScrollbar = ( props: PostScrollbarProps ) =>
 {

@@ -28,6 +28,7 @@ export interface CertifiedCourse {
 
 // Type for portfolio projects data.
 export interface PortfolioProject {
+    id: string,
     name: string,
     technologies: string[],
     description: string,

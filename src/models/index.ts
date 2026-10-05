@@ -3,3 +3,4 @@
 
 export * from './ContactTypes';
 export * from './CurriculumVitaeTypes';
+export * from './PostsTypes';
