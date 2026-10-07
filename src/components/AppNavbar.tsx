@@ -77,7 +77,7 @@ export const AppNavbar = ( { currentLocale, onLanguageToggle, onNavigate }: AppN
                 <Nav.Link
                     className='text-body'
                     active={ activeTab === 'posts' }
-                    onClick= { () => { handleNavigate( 'posts' ); } }
+                    onClick= { () => { handleNavigate( '/posts' ); } }
                 >
                     { t( 'nav.posts' ) }
                 </Nav.Link>
@@ -86,7 +86,7 @@ export const AppNavbar = ( { currentLocale, onLanguageToggle, onNavigate }: AppN
                 <Nav.Link
                     className='text-body'
                     active={ activeTab === 'cv' }
-                    onClick= { () => { handleNavigate( 'cv' ); } }
+                    onClick= { () => { handleNavigate( '/cv' ); } }
                 >
                     { t( 'nav.curriculumVitae' ) }
                 </Nav.Link>
@@ -95,7 +95,7 @@ export const AppNavbar = ( { currentLocale, onLanguageToggle, onNavigate }: AppN
                 <Nav.Link
                     className='text-body'
                     active={ activeTab === 'contact' }
-                    onClick= { () => { handleNavigate( 'contact' ); } }
+                    onClick= { () => { handleNavigate( '/contact' ); } }
                 >
                     { t( 'nav.contact' ) }
                 </Nav.Link>

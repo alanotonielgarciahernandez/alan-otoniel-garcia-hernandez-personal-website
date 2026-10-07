@@ -143,14 +143,14 @@ export const HomeScreen = () =>
                 <Button
                     variant='outline-light'
                     size='lg'
-                    onClick={ () => { void navigate( 'cv' ); } }
+                    onClick={ () => { void navigate( '/cv' ); } }
                 >
                     { t( 'home.quickActions.viewCv' ) }
                 </Button>
                 <Button
                     variant='light'
                     size='lg'
-                    onClick={ () => { void navigate( 'contact' ); } }
+                    onClick={ () => { void navigate( '/contact' ); } }
                 >
                     { t( 'home.quickActions.contactMe' ) }
                 </Button>
