@@ -20,6 +20,29 @@ const isValidDate = ( dateString: string ): boolean =>
 };
 
 /**
+ * Validates if a path is a safe post path.
+ * @param path - The path to validate
+ * @returns True if the path is safe, false otherwise
+ */
+const isSafePostPath = ( path: string ): boolean =>
+{
+    try
+    {
+        const url = new URL( path, window.location.origin );
+
+        return (
+            url.origin === window.location.origin &&
+            url.pathname.startsWith( '/locale/' ) &&
+            !url.pathname.includes( '..' )
+        );
+    }
+    catch
+    {
+        return false;
+    }
+};
+
+/**
  * Checks if a value is a valid post index entry.
  * @param value The value to check.
  * @returns True if the value is a valid post index entry, false otherwise.
@@ -29,6 +52,8 @@ const isValidIndexEntry = ( value: unknown ): value is PostIndexEntry =>
     if ( typeof value !== 'object' || value === null ) return false;
 
     const entry = value as Record< string, unknown >;
+
+    if ( typeof entry.path !== 'string' || !isSafePostPath( entry.path ) ) return false;
 
     return (
         typeof entry.id === 'string' && entry.id.length > 0 &&
