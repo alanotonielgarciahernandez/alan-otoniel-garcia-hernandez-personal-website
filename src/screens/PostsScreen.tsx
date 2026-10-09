@@ -100,13 +100,6 @@ export const PostsScreen = () =>
             return;
         }
 
-        const numeric = Number( id );
-        if ( Number.isInteger( numeric ) && numeric >= 0 && numeric < postEntries.length )
-        {
-            setSelectedPost( numeric );
-            return;
-        }
-
         setSelectedPost( 0 );
         void navigate( `/posts/${ postEntries[ 0 ].id }`, { replace: true } );
     }, [ id, navigate, postEntries ] );
