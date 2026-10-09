@@ -6,7 +6,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 // Import screens.
 import { App } from '../App';;
-import { HomeScreen, ContactScreen, CurriculumVitaeScreen, PostsScreen } from '../screens';
+import { HomeScreen, ContactScreen, CurriculumVitaeScreen, PostsScreen, RouteErrorScreen } from '../screens';
 
 // App router that manages the history stack.
 export const router = createBrowserRouter
@@ -16,7 +16,7 @@ export const router = createBrowserRouter
       // Base component extended by all the pages with the project context.
       path: '',
       element: <App />,
-      errorElement: <App />,
+      errorElement: <RouteErrorScreen />,
 
       // The children are placed inside the <App /> component.
       children:

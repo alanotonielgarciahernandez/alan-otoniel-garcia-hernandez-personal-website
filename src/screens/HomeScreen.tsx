@@ -8,10 +8,10 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 
 // Import React Router navigate function.
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Import React Bootstrap components.
-import { Badge, Button, Card, Image, Stack } from 'react-bootstrap';
+import { Alert, Badge, Button, Card, Image, Stack } from 'react-bootstrap';
 
 // Import helper functions.
 import { getFeaturedProjectEntries } from '../helpers/featuredProjectsHelpers';
@@ -22,17 +22,48 @@ import { socialLinks } from '../data/SocialMedia';
 // Import types.
 import type { PortfolioProject, SocialLink } from '../models';
 
+// Define the shape of the route error state.
+interface RouteErrorState
+{
+    routeError?: boolean;
+}
+
+// Type guard to check if the state is of type RouteErrorState.
+const isRouteErrorState = ( state: unknown ): state is RouteErrorState =>
+{
+    return typeof state === 'object' && state !== null;
+};
 
 export const HomeScreen = () =>
 {
     // React Router navigate function to change routes programmatically.
     const navigate = useNavigate();
 
+    // React Router location object to access the current route's state.
+    const location = useLocation();
+
+    // Store the route error locally so the alert can be dismissed independently
+    // from the navigation state.
+    const hasRouteError = isRouteErrorState( location.state ) && location.state.routeError === true;
+
+    useEffect( () =>
+    {
+        if ( !hasRouteError ) return;
+
+        // Remove the one-time flag from browser history after reading it.
+        void navigate( '/', { replace: true, state: null } );
+    }, [ hasRouteError, navigate ] );
+
     // Translation hook to read the current active language.
     const { t } = useTranslation();
 
+    // State to control the visibility of the route error alert.
+    const [ showRouteError, setShowRouteError ] = useState( hasRouteError );
+
     // State to hold the featured projects content loaded from the public folder at runtime.
     const [ featuredProjects, setFeaturedProjects ] = useState< PortfolioProject[] >( [] );
+
+    // State to control the visibility of the featured projects error alert.
     const [ hasFeaturedProjectsError, setHasFeaturedProjectsError ] = useState( false );
 
     useEffect(
@@ -74,6 +105,16 @@ export const HomeScreen = () =>
         <Stack
             gap={ 5 }
         >
+            { showRouteError && (
+                <Alert
+                    variant='danger'
+                    dismissible
+                    onClose={ () => { setShowRouteError( false ); } }
+                >
+                    Requested page could not be loaded. You have been redirected to Home.
+                </Alert>
+            ) }
+
             { /* Large Signature at the top. */ }
             <Image
                 className='d-none d-md-flex'
