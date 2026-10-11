@@ -2,7 +2,7 @@
 // Helper functions for the featured projects.
 
 // Import types.
-import type { PortfolioProject } from '../models';
+import type { FeaturedProject } from '../models';
 
 const FEATURED_PROJECTS_PATH = `/FeaturedProjects.json`;
 
@@ -11,7 +11,7 @@ const FEATURED_PROJECTS_PATH = `/FeaturedProjects.json`;
  * @param value The value to check.
  * @returns True if the value is a valid featured project, false otherwise.
  */
-const isValidFeaturedProject = ( value: unknown ): value is PortfolioProject =>
+const isValidFeaturedProject = ( value: unknown ): value is FeaturedProject =>
 {
     if ( typeof value !== 'object' || value === null ) return false;
 
@@ -32,9 +32,9 @@ const isValidFeaturedProject = ( value: unknown ): value is PortfolioProject =>
 
 /**
  * Fetches and processes the featured projects entries.
- * @returns A promise that resolves to an array of PortfolioProject objects.
+ * @returns A promise that resolves to an array of FeaturedProject objects.
  */
-export const getFeaturedProjectEntries = async ( signal?: AbortSignal ): Promise< PortfolioProject[] > =>
+export const getFeaturedProjectEntries = async ( signal?: AbortSignal ): Promise< FeaturedProject[] > =>
 {
     try
     {
@@ -57,7 +57,7 @@ export const getFeaturedProjectEntries = async ( signal?: AbortSignal ): Promise
             throw new Error( `Invalid featured projects format at ${ FEATURED_PROJECTS_PATH }` );
         }
 
-        const featuredProjectEntries: PortfolioProject[] = rawData
+        const featuredProjectEntries: FeaturedProject[] = rawData
             .filter( isValidFeaturedProject )
             .map( ( entry ) =>
             {
@@ -67,7 +67,6 @@ export const getFeaturedProjectEntries = async ( signal?: AbortSignal ): Promise
                         id: entry.id,
                         name: entry.name,
                         technologies: entry.technologies,
-                        description: entry.description,
                         image: entry.image,
                         link: entry.link,
                     };
@@ -78,7 +77,7 @@ export const getFeaturedProjectEntries = async ( signal?: AbortSignal ): Promise
                     return null;
                 }
             } )
-            .filter( ( featuredProject ): featuredProject is PortfolioProject => featuredProject !== null );
+            .filter( ( featuredProject ): featuredProject is FeaturedProject => featuredProject !== null );
         
         return featuredProjectEntries;
     }

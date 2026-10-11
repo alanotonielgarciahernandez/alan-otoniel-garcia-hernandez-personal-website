@@ -20,7 +20,7 @@ import { getFeaturedProjectEntries } from '../helpers/featuredProjectsHelpers';
 import { socialLinks } from '../data/SocialMedia';
 
 // Import types.
-import type { PortfolioProject, SocialLink } from '../models';
+import type { FeaturedProject, SocialLink } from '../models';
 
 // Define the shape of the route error state.
 interface RouteErrorState
@@ -54,7 +54,7 @@ export const HomeScreen = () =>
     const [ showRouteError, setShowRouteError ] = useState( hasRouteError );
 
     // State to hold the featured projects content loaded from the public folder at runtime.
-    const [ featuredProjects, setFeaturedProjects ] = useState< PortfolioProject[] >( [] );
+    const [ featuredProjects, setFeaturedProjects ] = useState< FeaturedProject[] >( [] );
 
     // State to control the visibility of the featured projects error alert.
     const [ hasFeaturedProjectsError, setHasFeaturedProjectsError ] = useState( false );
