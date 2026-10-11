@@ -57,27 +57,22 @@ export const getFeaturedProjectEntries = async ( signal?: AbortSignal ): Promise
             throw new Error( `Invalid featured projects format at ${ FEATURED_PROJECTS_PATH }` );
         }
 
-        const featuredProjectEntries: FeaturedProject[] = rawData
-            .filter( isValidFeaturedProject )
-            .map( ( entry ) =>
-            {
-                try
-                {
-                    return {
-                        id: entry.id,
-                        name: entry.name,
-                        technologies: entry.technologies,
-                        image: entry.image,
-                        link: entry.link,
-                    };
-                }
-                catch ( error )
-                {
-                    console.error( `Error processing featured project ${ entry.id }:`, error );
-                    return null;
-                }
-            } )
-            .filter( ( featuredProject ): featuredProject is FeaturedProject => featuredProject !== null );
+        if ( !rawData.every( isValidFeaturedProject ) )
+        {
+            console.error( `Invalid featured project entry at ${ FEATURED_PROJECTS_PATH }` );
+            throw new Error( `Invalid featured project entry at ${ FEATURED_PROJECTS_PATH }` );
+        }
+
+        const featuredProjectEntries: FeaturedProject[] = rawData.map( entry =>
+        {
+            return {
+                id: entry.id,
+                name: entry.name,
+                technologies: entry.technologies,
+                image: entry.image,
+                link: entry.link,
+            };
+        } );
         
         return featuredProjectEntries;
     }
