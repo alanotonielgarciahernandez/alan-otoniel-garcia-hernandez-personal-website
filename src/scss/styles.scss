@@ -1,12 +1,6 @@
-// Import all of Bootstrap's CSS
-@import 'bootstrap/scss/bootstrap';
-
-// Import Bootstrap Icons CSS.
-@import 'bootstrap-icons/font/bootstrap-icons.css';
-
 // Import custom styles.
-@import 'buttons';
+@use 'buttons';
 
-@import 'cards';
+@use 'cards';
 
-@import 'tables';
+@use 'tables';

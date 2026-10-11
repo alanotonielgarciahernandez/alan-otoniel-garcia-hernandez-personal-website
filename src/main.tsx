@@ -11,6 +11,12 @@ import { RouterProvider } from 'react-router-dom';
 // Import custom Router.
 import { router } from './router/Router';
 
+// Import Bootstrap CSS.
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// Import Bootstrap Icons CSS.
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 // Import custom CSS.
 import './scss/styles.scss';
 
