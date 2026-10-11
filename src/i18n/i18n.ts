@@ -12,6 +12,7 @@ import { homeEnglish, homeSpanish } from './HomeLocale';
 import { contactEnglish, contactSpanish } from './ContactLocale';
 import { postsEnglish, postsSpanish } from './PostsLocale';
 import { cvEnglish, cvSpanish } from './CVLocale';
+import { routeErrorEnglish, routeErrorSpanish } from './RouteErrorLocale';
 
 void i18n
 .use( initReactI18next )
@@ -32,6 +33,9 @@ void i18n
         {
           // Navigation bar labels.
           nav: navigationEnglish,
+
+          // Route error page content.
+          routeError: routeErrorEnglish,
 
           // Home page content.
           home: homeEnglish,
@@ -55,6 +59,9 @@ void i18n
         {
           // Navigation bar labels.
           nav: navigationSpanish,
+
+          // Route error page content.
+          routeError: routeErrorSpanish,
 
           // Home page content.
           home: homeSpanish,

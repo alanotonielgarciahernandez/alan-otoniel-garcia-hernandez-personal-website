@@ -44,7 +44,8 @@ export const HomeScreen = () =>
 
     // Store the route error locally so the alert can be dismissed independently
     // from the navigation state.
-    const hasRouteError = isRouteErrorState( location.state ) && location.state.routeError === true;
+    const routeState: unknown = location.state;
+    const hasRouteError = isRouteErrorState( routeState ) && routeState.routeError === true;
 
     // Translation hook to read the current active language.
     const { t } = useTranslation();
