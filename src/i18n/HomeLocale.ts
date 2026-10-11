@@ -25,6 +25,10 @@ export const homeEnglish =
     featuredProjects:
     {
         title: 'Featured Projects',
+
+        noProjects: 'No featured projects available.',
+
+        loadError: 'Featured projects could not be loaded.',
     },
 
     social:
@@ -59,6 +63,10 @@ export const homeSpanish =
     featuredProjects:
     {
         title: 'Proyectos destacados',
+
+        noProjects: 'No hay proyectos destacados disponibles.',
+
+        loadError: 'No se pudieron cargar los proyectos destacados.',
     },
 
     social:

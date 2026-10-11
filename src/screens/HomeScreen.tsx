@@ -205,19 +205,19 @@ export const HomeScreen = () =>
             </Stack>
 
             { /* Featured projects section. */ }
-            { shouldRenderFeaturedProjects && (
-                <section>
-                    <h2 className='h4 mb-3'>
-                        { t( 'home.featuredProjects.title' ) }
-                    </h2>
+            <section>
+                <h2 className='h4 mb-3'>
+                    { t( 'home.featuredProjects.title' ) }
+                </h2>
 
-                    <Stack
-                        className='flex-wrap'
-                        direction='horizontal'
-                        gap={ 3 }
-                    >
-                        { /* Map over the featured projects data to create project cards. */ }
-                        { featuredProjects.map( ( project, index: number ) => (
+                <Stack
+                    className='flex-wrap'
+                    direction='horizontal'
+                    gap={ 3 }
+                >
+                    { /* Map over the featured projects data to create project cards. */ }
+                    { shouldRenderFeaturedProjects
+                        ? featuredProjects.map( ( project, index: number ) => (
                             <Card
                                 key={ index }
                                 as='a'
@@ -239,10 +239,20 @@ export const HomeScreen = () =>
                                     </Badge>
                                 </Card.ImgOverlay>
                             </Card>
-                        ) ) }
-                    </Stack>
-                </section>
-            ) }
+                        ) )
+
+                        : (
+                            <span className='text-body'>
+                                {
+                                    hasFeaturedProjectsError
+                                        ? t( 'home.featuredProjects.loadError' )
+                                        : t( 'home.featuredProjects.noProjects' )
+                                }
+                            </span>
+                        )
+                    }
+                </Stack>
+            </section>
 
             { /* Social links section. */ }
             <section>
