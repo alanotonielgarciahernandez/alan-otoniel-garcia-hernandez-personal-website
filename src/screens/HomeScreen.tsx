@@ -46,14 +46,6 @@ export const HomeScreen = () =>
     // from the navigation state.
     const hasRouteError = isRouteErrorState( location.state ) && location.state.routeError === true;
 
-    useEffect( () =>
-    {
-        if ( !hasRouteError ) return;
-
-        // Remove the one-time flag from browser history after reading it.
-        void navigate( '/', { replace: true, state: null } );
-    }, [ hasRouteError, navigate ] );
-
     // Translation hook to read the current active language.
     const { t } = useTranslation();
 
@@ -99,6 +91,21 @@ export const HomeScreen = () =>
         []
     );
 
+    useEffect( () =>
+    {
+        if ( !hasRouteError ) return;
+
+        // Remove the one-time flag from browser history after reading it.
+        void navigate(
+            '/',
+            {
+                replace: true,
+                state: null
+            }
+        );
+    }, [ hasRouteError, navigate ] );
+
+    // Determine if the featured projects section should be rendered based on the loaded content and error state.
     const shouldRenderFeaturedProjects = featuredProjects.length > 0 && !hasFeaturedProjectsError;
 
     return (
@@ -111,7 +118,7 @@ export const HomeScreen = () =>
                     dismissible
                     onClose={ () => { setShowRouteError( false ); } }
                 >
-                    Requested page could not be loaded. You have been redirected to Home.
+                    { t( 'home.invalidRouteRedirected' ) }
                 </Alert>
             ) }
 

@@ -31,6 +31,8 @@ export const homeEnglish =
     {
         title: 'Find me online',
     },
+
+    invalidRouteRedirected: `The requested page could not be found. You have been redirected to the home page.`,
 };
 
 export const homeSpanish =
@@ -63,4 +65,6 @@ export const homeSpanish =
     {
         title: 'Encuentrame en linea',
     },
+
+    invalidRouteRedirected: `No se pudo encontrar la página solicitada. Se te redirigió a la página de inicio.`,
 };

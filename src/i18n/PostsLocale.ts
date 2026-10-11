@@ -18,6 +18,8 @@ export const postsEnglish =
     timeAgo: `{{time}} {{unit}} ago`,
 
     noPosts: `No posts available.`,
+
+    invalidPostRedirected: `The requested post could not be found. You have been redirected to another post.`,
 };
 
 export const postsSpanish =
@@ -37,4 +39,6 @@ export const postsSpanish =
     timeAgo: `Hace {{time}} {{unit}}`,
 
     noPosts: `No hay publicaciones disponibles.`,
+
+    invalidPostRedirected: `No se pudo encontrar la publicación solicitada. Se te redirigió a otra publicación.`,
 };
