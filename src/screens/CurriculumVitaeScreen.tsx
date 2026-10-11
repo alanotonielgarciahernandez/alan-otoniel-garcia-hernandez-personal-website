@@ -49,6 +49,77 @@ const emptyCurriculumVitaeContent: CurriculumVitaeContent =
     }
 };
 
+// Type guard functions to validate the structure of the loaded curriculum vitae content.
+const isRecord = ( value: unknown ): value is Record< string, unknown > =>
+{
+    return typeof value === 'object' && value !== null;
+};
+
+// Type guard to check if a value is a record with specific string properties.
+const hasStringProperties = (
+    value: unknown,
+    properties: string[]
+): value is Record< string, unknown > =>
+{
+    return isRecord( value ) &&
+        properties.every( property => typeof value[ property ] === 'string' );
+};
+
+// Type guard to check if a value is an array of strings.
+const isStringArray = ( value: unknown ): value is string[] =>
+{
+    return Array.isArray( value ) && value.every( item => typeof item === 'string' );
+};
+
+// Type guard to check if a value is a CurriculumVitaeContent object.
+const isCurriculumVitaeContent = ( value: unknown ): value is CurriculumVitaeContent =>
+{
+    if ( !isRecord( value ) )
+    {
+        return false;
+    }
+
+    const education = value.education;
+    const freelanceExperience = value.freelanceExperience;
+    const certifiedCourses = value.certifiedCourses;
+    const interests = value.interests;
+    const abilities = value.abilities;
+    const portfolioProjects = value.portfolioProjects;
+
+    return (
+        hasStringProperties( education, [ 'title' ] ) &&
+        Array.isArray( education.schools ) &&
+        education.schools.every( school =>
+            hasStringProperties( school, [ 'name', 'location', 'degree', 'period' ] )
+        ) &&
+        hasStringProperties( freelanceExperience, [ 'title' ] ) &&
+        Array.isArray( freelanceExperience.experiences ) &&
+        freelanceExperience.experiences.every( experience =>
+            hasStringProperties(
+                experience,
+                [ 'role', 'technologies', 'period', 'company', 'bossName' ]
+            )
+        ) &&
+        hasStringProperties( certifiedCourses, [ 'title' ] ) &&
+        Array.isArray( certifiedCourses.courses ) &&
+        certifiedCourses.courses.every( course =>
+            hasStringProperties( course, [ 'name', 'instructor', 'period', 'link' ] )
+        ) &&
+        hasStringProperties( interests, [ 'title', 'description' ] ) &&
+        hasStringProperties( abilities, [ 'title' ] ) &&
+        isStringArray( abilities.list ) &&
+        hasStringProperties( portfolioProjects, [ 'title' ] ) &&
+        Array.isArray( portfolioProjects.projects ) &&
+        portfolioProjects.projects.every( project =>
+            hasStringProperties(
+                project,
+                [ 'id', 'name', 'description', 'image', 'link' ]
+            ) &&
+            isStringArray( project.technologies )
+        )
+    );
+};
+
 
 export const CurriculumVitaeScreen = () =>
 {
@@ -92,8 +163,13 @@ export const CurriculumVitaeScreen = () =>
                         return;
                     }
 
-                    // Parse the response as JSON and set the curriculum vitae state with the loaded content.
-                    const content = await response.json() as CurriculumVitaeContent;
+                    // Parse and validate the response before storing it in render state.
+                    const content: unknown = await response.json();
+
+                    if ( !isCurriculumVitaeContent( content ) )
+                    {
+                        throw new Error( 'Curriculum vitae data has an invalid format.' );
+                    }
 
                     // Save the loaded content to the curriculum vitae state.
                     setCurriculumVitae( content );

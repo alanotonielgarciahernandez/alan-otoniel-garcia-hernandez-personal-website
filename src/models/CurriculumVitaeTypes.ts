@@ -12,7 +12,7 @@ export interface EducationSchool {
 // Type for freelance experience data.
 export interface FreelanceExperience {
     role: string,
-    technologies: string[],
+    technologies: string,
     period: string,
     company: string,
     bossName: string,
