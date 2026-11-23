@@ -1,76 +1,63 @@
-<!-- markdownlint-disable heading-start-left first-line-h1 -->
-<!-- markdownlint-capture -->
-<!-- markdownlint-disable no-inline-html heading-increment -->
+<div align="center">
+  <img src="./public/icons/signature.svg" alt="Alan Otoniel García Hernández" height="50">
 
-<div align='center'>
-  <img src='./public/icons/signature.svg' alt='Alan Otoniel García Hernández Home Page' height='50px'>
+  # Personal Website
 
-  #### Alan Otoniel García Hernández Main Website.
+  **Personal website to present my work, experience, and contact information.**  
+  **Sitio web personal para presentar mi trabajo, experiencia e información de contacto.**
+
+  [ ![ Live Demo ]( https://img.shields.io/badge/Live_Demo-Visit_Site-brightgreen?style=flat-square&logo=safari ) ]( https://alanotonielgarciahernandez.com )
+  [ ![ TypeScript ]( https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white ) ]( https://www.typescriptlang.org/ )
+  [ ![ React ]( https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB ) ]( https://react.dev/ )
+  [ ![ License: MIT ]( https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square ) ]( https://opensource.org/licenses/MIT )
 </div>
 
-# Information
-Started on May 30, 2026, the Personal Website web application was developed six months after I registered my personal domain and while the
-'Personal Projects' web application was experiencing takedowns during its migration to Kubernetes and a new hosting provider.
+---
 
-Between the release of 'Personal Projects' and the start of this project, I was working on a new portfolio project and a responsive update for 'Personal Projects'. Both are still in progress because I am currently studying the fifth semester of my third year at university.
-At the moment, university keeps me too busy to work consistently on my portfolio, but I remain committed to expanding it.
+## Demo / Demostración
 
-## How has this project helped me build my portfolio?
-The source code of this project demonstrates the skills I retained from my previous work by using the main tools in this stack while maintaining a clean design in both the UI and the codebase.
+**Live / En vivo:** [ https://www.alanotonielgarciahernandez.com ]( https://alanotonielgarciahernandez.com )
 
-## How has this project helped me test and expand my knowledge?
-This project helped me reinforce my React and TypeScript fundamentals, improve my component and route organization, and maintain a cleaner frontend architecture.
+<!-- Add screenshots -->
+![ Home ]( ./docs/screenshots/home.png )
+![ CV ]( ./docs/screenshots/cv.png )
 
+## What it does / Qué hace
 
-## How has this project helped to test and expand my skills?
-It also gave me practical experience improving maintainability, organizing multilingual content, and preparing a personal website for long-term updates.
+- Home page with a short introduction.  
+  *Página de inicio con una introducción breve.*
 
+- Posts section with personal articles.  
+  *Sección de publicaciones con artículos personales.*
 
-## Why did I make this project?
-I needed a simple website to continue presenting my work online, and this project gave me a practical way to apply previously learned skills using TypeScript.
+- Curriculum Vitae page (education, experience, projects, and courses).  
+  *Página de Curriculum Vitae (educación, experiencia, proyectos y cursos).*
 
-## What's next?
-At this stage, the plan is to maintain the already deployed projects ('Personal Projects' and this one) while I continue working on pending and new projects.
+- Contact page with availability and preferred topics.  
+  *Página de contacto con disponibilidad y temas de interés.*
 
-# How to use
+Content is loaded from localized JSON files for easier updates.  
+*El contenido se carga desde archivos JSON localizados para facilitar las actualizaciones.*
 
-## Requirements
-[ NodeJS ]( https://nodejs.org/ ) and [ Yarn ]( https://yarnpkg.com/ ) are required to start working in this project.  
-Install all Node modules by opening a shell and running the following command inside the project folder:
-```sh
+## Tech Stack / Tecnologías
+
+- **Language / Lenguaje:** TypeScript
+- **Framework:** React + Vite
+- **Routing:** React Router
+- **Styling:** Bootstrap + React-Bootstrap
+- **Package Manager:** Yarn
+
+## How to run it / Cómo correrlo
+
+### Requirements / Requisitos
+
+- Node.js 18+
+- Yarn
+
+### Steps / Pasos
+
+```bash
+git clone https://github.com/alanotonielgarciahernandez/alan-otoniel-garcia-hernandez-personal-website.git
+cd alan-otoniel-garcia-hernandez-personal-website
 yarn install
-```
-
-## Build the project
-Open a shell and run the command below to build the production version of the project.
-```sh
-yarn build
-```
-
-# Functions
-This project is a simple web application where you can navigate through specific pages displaying different personal information.
-
-## Home Page.
-Contains an introduction about me, including general information about my work.
-
-## Posts Page.
-Contains a list of personal posts. Each post can be opened to read its full content.
-
-## Curriculum Vitae Page.
-Contains my professional career history, including my education, previous experience, certified courses, and portfolio projects.
-Content is read from a separated localized JSON files to make it easier to maintain and update in the future.
-
-## Contact Page.
-Contains my contact information, including my preferred topics and availability.
-
-# Icon sources
-- [ Bootstrap Icons ]( https://github.com/twbs/icons ), licensed under [ MIT License ]( https://github.com/twbs/icons?tab=MIT-1-ov-file ).
-
-# Technologies
-- Programming Language: TypeScript
-- Runtime Environment: [ NodeJS ]( https://github.com/nodejs/node )
-- Package Manager: [ Yarn ]( https://github.com/yarnpkg/berry )
-- Build Tool: [ ReactJS + Vite ]( https://github.com/vitejs/vite )
-- CSS Framework: [ Bootstrap ]( https://github.com/twbs/bootstrap )
-- Bootstrap Library: [ React-Bootstrap ]( https://github.com/react-bootstrap/react-bootstrap )
-- Router: [ React Router ]( https://github.com/remix-run/react-router )
+yarn dev
